@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <title>Internship Project 1</title>
+  <script src="js/jquery-3.2.1.min.js" charset="utf-8"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/index.css">
+  <link rel="stylesheet" href="css/hexagon.min.css">
+  <!-- <link rel="stylesheet" href="css/font-awesome/css/fontawesome-all.css"> -->
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+</head>
+
+<body>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-md-2">
+        <div class="agent-img">
+          <img src="support.png" alt="" height="150" width="150" style="border: 8px solid grey;">
+        </div>
+        <div>
+          <br>
+          <p>This is a sample input of the agent's mesasage! <br>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
+            nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+        </div>
+      </div>
+      <div class="col-md-10 main-data">
+        <div class="my-navbar text-center">
+          <span class="saver ws-ele" style="float:left;"><input type="submit" class="btn btn-info btn-save" name="" value="Save"></span>
+          <span class="ws-ele text-center"> <h3 class="Workspace text-center">Workspace</h3> </span>
+          <span class="ws-ele" style="float: right;"><input type="submit" class="btn btn-info btn-so" name="" onclick="clearAll()" value="Start Over"></span>
+        </div>
+        <br>
+        <!-- <br> -->
+        <div class="row ws-data">
+          <div class="col-md-2 tp-full text-center">
+            <h4 class="tool-pal">Tool Palette</h4>
+            <!-- <br> -->
+            <i class="fa fa-hourglass" aria-hidden="true"></i>
+            <br>
+            <i class="fa fa-eye fa-3x" aria-hidden="true"></i>
+            <br>
+            <br>
+            <i class="fa fa-wrench fa-3x" aria-hidden="true"></i>
+            <br>
+            <br>
+            <i class="fa fa-expand fa-3x" aria-hidden="true"></i>
+            <br>
+            <br>
+            <i class="fa fa-file-text-o fa-3x" aria-hidden="true"></i>
+
+          </div>
+          <div class="col-md-8 main-row">
+            <div class="main-ws">
+              <br>
+              <!-- <span class="element1">You can drag me only within this div.</span> -->
+            </div>
+          </div>
+          <div class="col-md-2 tp-full text-center">
+            <h4 class="nodes-ws">Nodes</h4>
+            <br>
+            <div class="circle-xs node-eles" onclick="gencircle()"><span class="f-text">F</span></div>
+            <br>
+            <div class="hexagon-xs hexagon-warning node-eles" onclick="genhex()">S</div>
+            <br>
+            <div class="rect-xs node-eles" onclick="genrect()">B</div>
+            <br>
+            <br>
+            <h4 class="nodes-ws">Connectors</h4>
+            <br>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</body>
+<script src="js/tether.min.js" charset="utf-8"></script>
+<script src="js/index.js" charset="utf-8"></script>
+<script src="js/bootstrap.min.js" charset="utf-8"></script>
+<script>
+  // $(".element1").draggable({
+  //   containment: ".main-ws"
+  // });
+  // $("#div5 span").draggable({
+  //   axis: "x"
+  // });
+</script>
+
+</html>
