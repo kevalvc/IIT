@@ -6,6 +6,13 @@
   <title>Internship Project 1</title>
   <script src="js/jquery-3.2.1.min.js" charset="utf-8"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script type="text/javascript">
+    mxBasePath = 'src';
+  </script>
+
+  <script type="text/javascript" src="js/mxClient.js"></script>
+  <script type="text/javascript" src="js/graphFunctions.js"></script>
+
   <link rel="stylesheet" href="css/bootstrap.min.css">
   <link rel="stylesheet" href="css/index.css">
   <link rel="stylesheet" href="css/hexagon.min.css">
@@ -13,7 +20,7 @@
   <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
 </head>
 
-<body>
+<body onload="main(document.getElementById('mainer'))">
 
   <div class="container">
     <div class="row">
@@ -54,7 +61,7 @@
 
           </div>
           <div class="col-md-8 main-row">
-            <div class="main-ws">
+            <div class="main-ws" id="mainer">
               <br>
               <!-- <span class="element1">You can drag me only within this div.</span> -->
             </div>
@@ -62,11 +69,16 @@
           <div class="col-md-2 tp-full text-center">
             <h4 class="nodes-ws">Nodes</h4>
             <br>
-            <div class="circle-xs node-eles" onclick="gencircle()"><span class="f-text">F</span></div>
+            <!-- <div class="circle-xs node-eles" onclick="gencircle()"><span class="f-text">F</span></div> -->
+            <img src="css\F.png" style="width:42px;height:42px;" onclick="addFSBVertex(mainer,1)">
             <br>
-            <div class="hexagon-xs hexagon-warning node-eles" onclick="genhex()">S</div>
             <br>
-            <div class="rect-xs node-eles" onclick="genrect()">B</div>
+            <!-- <div class="hexagon-xs hexagon-warning node-eles" onclick="genhex()">S</div> -->
+            <img src="css\S.png" style="width:42px;height:42px;" onclick="addFSBVertex(mainer,2)">
+            <br>
+            <br>
+            <!-- <div class="rect-xs node-eles" onclick="genrect()">B</div> -->
+            <img src="css\B.png" style="width:48px;height:34px;" onclick="addFSBVertex(mainer,3)">
             <br>
             <br>
             <h4 class="nodes-ws">Connectors</h4>

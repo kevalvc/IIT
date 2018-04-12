@@ -1,6 +1,9 @@
-// $(".element1").draggable({
-//   containment: ".main-ws"
-// });
+$("g").draggable({
+  containment: ".main-ws"
+});
+$("rect").draggable({
+  containment: ".main-ws"
+});
 
 function clearAll() {
   $(".new-cir").remove();
