@@ -1,6 +1,7 @@
 var x=60,y=60;
 var graph;
 var parent;
+console.log(parseInt($('.main-ws').height()));
 function addFSBVertex(container,token)
 {
   //var graph = new mxGraph(container);
@@ -31,6 +32,7 @@ function main(container)
   graph = new mxGraph(container);
   parent = graph.getDefaultParent();
   new mxRubberband(graph);
+  graph.maximumGraphBounds = new mxRectangle(0, 0, parseInt($('.main-ws').width()), parseInt($('.main-ws').height()));
   if(!mxClient.isBrowserSupported())
   {
     mxUtils.error('Browser Not Supported');
