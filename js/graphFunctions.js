@@ -3,8 +3,14 @@ var x = 60,
 var graph;
 var parent;
 
+// "url(C:\\Users\\keval\\Desktop\\IDP-ET\\js\\examples\\editors\\images\\grid.gif)"
+
 function deleteCells() {
   graph.removeCells(graph.getSelectionCells());
+}
+
+function clearAll() {
+  graph.removeCells(graph.getChildVertices(graph.getDefaultParent()));
 }
 
 function addFSBVertex(container, token) {
@@ -13,34 +19,40 @@ function addFSBVertex(container, token) {
   new mxRubberband(graph);
   //graph.setEnabled(false);
 
-
-
   graph.getModel().beginUpdate();
   try {
     if (token == 1) {
-      var v1 = graph.insertVertex(parent, null, "F", x, y, 80, 30); //x,y,width,height
+      var v1 = graph.insertVertex(parent, null, "F", x, y, 80, 80); //x,y,width,height
       y = y + 40;
       var style = graph.getStylesheet().getDefaultVertexStyle();
-      style[mxConstants.STYLE_SHAPE] = 'circle';
+      style[mxConstants.STYLE_SHAPE] = mxConstants.SHAPE_ELLIPSE;
       style[mxConstants.STYLE_SPACING_TOP] = 0;
       style[mxConstants.STYLE_SPACING_RIGHT] = 0;
-      style[mxConstants.STYLE_GRADIENTCOLOR] = '#FFFFFF';
+      // style[mxConstants.STYLE_ROUNDED] = 1;
+      style[mxConstants.STYLE_FILLCOLOR] = '#45afe3';
+      // style[mxConstants.STYLE_GRADIENTCOLOR] = '#70c4ed';
     } else
     if (token == 2) {
-      var v2 = graph.insertVertex(parent, null, "S", x, y, 80, 30); //x,y,width,height
+      var v2 = graph.insertVertex(parent, null, "S", x, y, 80, 70); //x,y,width,height
       y = y + 40;
       var style = graph.getStylesheet().getDefaultVertexStyle();
-      style[mxConstants.STYLE_SHAPE] = 'box';
-      style[mxConstants.STYLE_SPACING_TOP] = FShape.prototype.extrude;
-      style[mxConstants.STYLE_SPACING_RIGHT] = FShape.prototype.extrude;
-      style[mxConstants.STYLE_GRADIENTCOLOR] = '#FFFFFF';
-    } else {
-      var v3 = graph.insertVertex(parent, null, "B", x, y, 80, 30); //x,y,width,height
-      y = y + 40;
-      var style = graph.getStylesheet().getDefaultVertexStyle();
-      style[mxConstants.STYLE_SHAPE] = 'rectangle';
+      style[mxConstants.STYLE_SHAPE] = mxConstants.SHAPE_HEXAGON;
+      // style[mxConstants.STYLE_SHAPE] = 'rectangle';
       style[mxConstants.STYLE_SPACING_TOP] = 0;
       style[mxConstants.STYLE_SPACING_RIGHT] = 0;
+      style[mxConstants.STYLE_FILLCOLOR] = '#ffa500';
+
+    } else {
+      var v3 = graph.insertVertex(parent, null, "B", x, y, 80, 40); //x,y,width,height
+      y = y + 40;
+      var style = graph.getStylesheet().getDefaultVertexStyle();
+      style[mxConstants.STYLE_SHAPE] = mxConstants.SHAPE_RECTANGLE;
+      // style[mxConstants.STYLE_SHAPE] = 'box';
+      // style[mxConstants.STYLE_SPACING_TOP] = FShape.prototype.extrude;
+      // style[mxConstants.STYLE_SPACING_RIGHT] = FShape.prototype.extrude;
+      // style[mxConstants.STYLE_GRADIENTCOLOR] = '#FFFFFF';
+      style[mxConstants.STYLE_FILLCOLOR] = '#fe5';
+
     }
   } catch (e) {
 

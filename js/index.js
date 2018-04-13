@@ -5,11 +5,11 @@ $("rect").draggable({
   containment: ".main-ws"
 });
 
-function clearAll() {
-  $(".new-cir").remove();
-  $(".new-hex").remove();
-  $(".new-rect").remove();
-}
+// function clearAll() {
+//   $(".new-cir").remove();
+//   $(".new-hex").remove();
+//   $(".new-rect").remove();
+// }
 
 function gencircle() {
   var mainws = document.getElementsByClassName("main-ws")[0];
