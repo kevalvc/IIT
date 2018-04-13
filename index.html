@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="" dir="ltr">
+<html lang="en" dir="ltr">
 
 <head>
   <meta charset="utf-8">
@@ -36,6 +36,7 @@
           <span class="saver ws-ele" style="float:left;"><input type="submit" class="btn btn-info btn-save" name="" value="Save"></span>
           <span class="ws-ele text-center"> <h3 class="Workspace text-center">Workspace</h3> </span>
           <span class="ws-ele" style="float: right;"><input type="submit" class="btn btn-info btn-so" name="" onclick="clearAll()" value="Start Over"></span>
+          <span class="ws-ele" style="float: right;"><input type="submit" class="btn btn-info btn-so" name="" onclick="deleteCells()" value="Delete"></span>
         </div>
         <br>
         <!-- <br> -->
@@ -59,7 +60,7 @@
           </div>
           <div class="col-md-8 main-row">
             <div class="main-ws" id="mainer">
-              <br>
+
               <!-- <span class="element1">You can drag me only within this div.</span> -->
             </div>
           </div>
@@ -80,6 +81,8 @@
             <br>
             <h4 class="nodes-ws">Connectors</h4>
             <br>
+            <img src="css\F.png" style="width:42px;height:42px;" onclick="">
+
           </div>
         </div>
       </div>
@@ -87,11 +90,14 @@
   </div>
 
 </body>
+
 <script type="text/javascript" src="js/tether.min.js" charset="utf-8"></script>
 <script type="text/javascript" src="js/index.js" charset="utf-8"></script>
 <script type="text/javascript" src="js/bootstrap.min.js" charset="utf-8"></script>
 <script type="text/javascript" src="js/mxClient.js"></script>
 <script type="text/javascript" src="js/graphFunctions.js"></script>
+
+</script>
 
 <script>
   // $(".element1").draggable({
