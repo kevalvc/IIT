@@ -13,6 +13,14 @@ function clearAll() {
   graph.removeCells(graph.getChildVertices(graph.getDefaultParent()));
 }
 
+function zoomIn(){
+  graph.zoomIn();
+}
+
+function zoomOut(){
+  graph.zoomOut();
+}
+
 function addFSBVertex(container, token) {
   //var graph = new mxGraph(container);
   //var parent = graph.getDefaultParent();
