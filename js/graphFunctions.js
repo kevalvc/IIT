@@ -194,7 +194,7 @@ function main(container) {
 					}
 					catch (e)
 					{
-						mxLog.show();
+						//mxLog.show();
 						//mxLog.debug('Using background image');
 
 						//container.style.backgroundImage = 'url(\'editors/images/grid.gif\')';
@@ -214,9 +214,8 @@ function main(container) {
   } else {
     graph.getModel().beginUpdate();
     try {
-      var v1 = graph.insertVertex(parent, null, "F", 20, 20, 80, 30); //x,y,width,height
-      var v2 = graph.insertVertex(parent, null, "S", 20, 120, 80, 30); //x,y,width,height
-      var e1 = graph.insertEdge(parent, null, "joins to", v1, v2);
+      //removed default vertex
+      addFSBVertex(container, 1);
     } catch (e) {
 
     } finally {
