@@ -13,6 +13,63 @@ function clearAll() {
   graph.removeCells(graph.getChildVertices(graph.getDefaultParent()));
 }
 
+function addFSBEdge(container, token) {
+
+  new mxRubberband(graph);
+
+  graph.getModel().beginUpdate();
+  try {
+    if (token == 1) {
+      console.log("hey");
+
+      var cell = new mxCell('Condition', new mxGeometry(0, 0, 80, 40), 'rhombus;whiteSpace=wrap;html=1;fillColor=#ffffc0;strokeColor=#ff0000;');
+      cell.vertex = true;
+      graph.insertVertex(cell);
+
+      var edge1 = new mxCell('no', new mxGeometry(0, 0, 0, 0), 'edgeStyle=orthogonalEdgeStyle;html=1;align=left;verticalAlign=bottom;endArrow=open;endSize=8;strokeColor=#ff0000;');
+      edge1.geometry.setTerminalPoint(new mxPoint(180, 20), false);
+      edge1.geometry.relative = true;
+      edge1.geometry.x = -1;
+      edge1.edge = true;
+
+      cell.insertEdge(edge1, true);
+
+      var edge2 = new mxCell('yes', new mxGeometry(0, 0, 0, 0), 'edgeStyle=orthogonalEdgeStyle;html=1;align=left;verticalAlign=top;endArrow=open;endSize=8;strokeColor=#ff0000;');
+      edge2.geometry.setTerminalPoint(new mxPoint(40, 100), false);
+      edge2.geometry.relative = true;
+      edge2.geometry.x = -1;
+      edge2.edge = true;
+
+      cell.insertEdge(edge2, true);
+
+
+      // var e1 = graph.insertEdge(parent, null, 'consist of', 1, 1);
+      // var style = graph.getStylesheet().getDefaultEdgeStyle();
+      // var cell = new mxCell(null, new mxGeometry(0, 0, 50, 50), style);
+      // cell.setEdge(true);
+      // style[mxConstants.STYLE_EDGE] = mxEdgeStyle.ElbowConnector;
+      // graph.insert(cell);
+
+
+      // var edge = new mxCell('', new mxGeometry(0, 0, 0, 0), 'edgeStyle=orthogonalEdgeStyle;html=1;verticalAlign=bottom;endArrow=open;endSize=8;strokeColor=#ff0000;');
+      // edge.geometry.setTerminalPoint(new mxPoint(15, 90), false);
+      // edge.geometry.relative = true;
+      // edge.edge = true;
+      // cell.insertEdge(edge, true);
+      //
+      console.log("bye1");
+      console.log("bye");
+
+    } else if (token == 2) {
+
+    }
+  } catch (e) {
+
+  } finally {
+    graph.getModel().endUpdate();
+  }
+}
+
 function addFSBVertex(container, token) {
   //var graph = new mxGraph(container);
   //var parent = graph.getDefaultParent();
@@ -31,6 +88,7 @@ function addFSBVertex(container, token) {
       // style[mxConstants.STYLE_ROUNDED] = 1;
       style[mxConstants.STYLE_FILLCOLOR] = '#45afe3';
       // style[mxConstants.STYLE_GRADIENTCOLOR] = '#70c4ed';
+      console.log(v1);
     } else
     if (token == 2) {
       var v2 = graph.insertVertex(parent, null, "S", x, y, 80, 70); //x,y,width,height
@@ -59,13 +117,13 @@ function addFSBVertex(container, token) {
   } finally {
     graph.getModel().endUpdate();
   }
-};
+}
 
 function main(container) {
   graph = new mxGraph(container);
   parent = graph.getDefaultParent();
   new mxRubberband(graph);
-  //graph.maximumGraphBounds = new mxRectangle(0, 0, parseInt($('.main-ws').width()), parseInt($('.main-ws').height()));
+  graph.maximumGraphBounds = new mxRectangle(0, 0, parseInt($('.main-ws').width()), parseInt($('.main-ws').height()));
   var style = graph.getStylesheet().getDefaultVertexStyle();
   //graph.setEnabled(false);
   // var style = graph.getStylesheet().getDefaultVertexStyle();
