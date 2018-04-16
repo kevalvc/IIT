@@ -16,7 +16,7 @@
 }
 
 .btn-so {
-  margin-right: 25%;
+  margin-right: 5px;
 }
 
 .Workspace, .ws-ele {
@@ -47,7 +47,7 @@
 
 .main-ws {
   height: 550px;
-  background-color: #fff2cc;
+  overflow: auto;
 }
 
 .tp-full {
@@ -103,4 +103,8 @@
   margin-left: 0px !important;
   margin-right: 0px !important;
   /* margin: auto !important; */
+}
+
+.ws-ele {
+  margin-right: 5px;
 }

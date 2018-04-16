@@ -13,61 +13,12 @@ function clearAll() {
   graph.removeCells(graph.getChildVertices(graph.getDefaultParent()));
 }
 
-function addFSBEdge(container, token) {
+function zoomIn(){
+  graph.zoomIn();
+}
 
-  new mxRubberband(graph);
-
-  graph.getModel().beginUpdate();
-  try {
-    if (token == 1) {
-      console.log("hey");
-
-      var cell = new mxCell('Condition', new mxGeometry(0, 0, 80, 40), 'rhombus;whiteSpace=wrap;html=1;fillColor=#ffffc0;strokeColor=#ff0000;');
-      cell.vertex = true;
-      graph.insertVertex(cell);
-
-      var edge1 = new mxCell('no', new mxGeometry(0, 0, 0, 0), 'edgeStyle=orthogonalEdgeStyle;html=1;align=left;verticalAlign=bottom;endArrow=open;endSize=8;strokeColor=#ff0000;');
-      edge1.geometry.setTerminalPoint(new mxPoint(180, 20), false);
-      edge1.geometry.relative = true;
-      edge1.geometry.x = -1;
-      edge1.edge = true;
-
-      cell.insertEdge(edge1, true);
-
-      var edge2 = new mxCell('yes', new mxGeometry(0, 0, 0, 0), 'edgeStyle=orthogonalEdgeStyle;html=1;align=left;verticalAlign=top;endArrow=open;endSize=8;strokeColor=#ff0000;');
-      edge2.geometry.setTerminalPoint(new mxPoint(40, 100), false);
-      edge2.geometry.relative = true;
-      edge2.geometry.x = -1;
-      edge2.edge = true;
-
-      cell.insertEdge(edge2, true);
-
-
-      // var e1 = graph.insertEdge(parent, null, 'consist of', 1, 1);
-      // var style = graph.getStylesheet().getDefaultEdgeStyle();
-      // var cell = new mxCell(null, new mxGeometry(0, 0, 50, 50), style);
-      // cell.setEdge(true);
-      // style[mxConstants.STYLE_EDGE] = mxEdgeStyle.ElbowConnector;
-      // graph.insert(cell);
-
-
-      // var edge = new mxCell('', new mxGeometry(0, 0, 0, 0), 'edgeStyle=orthogonalEdgeStyle;html=1;verticalAlign=bottom;endArrow=open;endSize=8;strokeColor=#ff0000;');
-      // edge.geometry.setTerminalPoint(new mxPoint(15, 90), false);
-      // edge.geometry.relative = true;
-      // edge.edge = true;
-      // cell.insertEdge(edge, true);
-      //
-      console.log("bye1");
-      console.log("bye");
-
-    } else if (token == 2) {
-
-    }
-  } catch (e) {
-
-  } finally {
-    graph.getModel().endUpdate();
-  }
+function zoomOut(){
+  graph.zoomOut();
 }
 
 function addFSBVertex(container, token) {
@@ -88,7 +39,6 @@ function addFSBVertex(container, token) {
       // style[mxConstants.STYLE_ROUNDED] = 1;
       style[mxConstants.STYLE_FILLCOLOR] = '#45afe3';
       // style[mxConstants.STYLE_GRADIENTCOLOR] = '#70c4ed';
-      console.log(v1);
     } else
     if (token == 2) {
       var v2 = graph.insertVertex(parent, null, "S", x, y, 80, 70); //x,y,width,height
@@ -117,13 +67,13 @@ function addFSBVertex(container, token) {
   } finally {
     graph.getModel().endUpdate();
   }
-}
+};
 
 function main(container) {
   graph = new mxGraph(container);
   parent = graph.getDefaultParent();
   new mxRubberband(graph);
-  graph.maximumGraphBounds = new mxRectangle(0, 0, parseInt($('.main-ws').width()), parseInt($('.main-ws').height()));
+  //graph.maximumGraphBounds = new mxRectangle(0, 0, parseInt($('.main-ws').width()), parseInt($('.main-ws').height()));
   var style = graph.getStylesheet().getDefaultVertexStyle();
   //graph.setEnabled(false);
   // var style = graph.getStylesheet().getDefaultVertexStyle();
@@ -132,15 +82,140 @@ function main(container) {
   //   style[mxConstants.STYLE_SPACING_RIGHT] = FShape.prototype.extrude;
   //   style[mxConstants.STYLE_GRADIENTCOLOR] = '#FFFFFF';
 
+  //Dynamic grid using HTML Canvas 5
+  (function()
+				{
+					try
+					{
+						var canvas = document.createElement('canvas');
+						canvas.style.position = 'absolute';
+						canvas.style.top = '0px';
+						canvas.style.left = '0px';
+						canvas.style.zIndex = -1;
+						graph.container.appendChild(canvas);
+
+						var ctx = canvas.getContext('2d');
+
+						// Modify event filtering to accept canvas as container
+						var mxGraphViewIsContainerEvent = mxGraphView.prototype.isContainerEvent;
+						mxGraphView.prototype.isContainerEvent = function(evt)
+						{
+							return mxGraphViewIsContainerEvent.apply(this, arguments) ||
+								mxEvent.getSource(evt) == canvas;
+						};
+
+						var s = 0;
+						var gs = 0;
+						var tr = new mxPoint();
+						var w = 0;
+						var h = 0;
+						function repaintGrid()
+						{
+							if (ctx != null)
+							{
+								var bounds = graph.getGraphBounds();
+								var width = Math.max(bounds.x + bounds.width, graph.container.clientWidth);
+								var height = Math.max(bounds.y + bounds.height, graph.container.clientHeight);
+								var sizeChanged = width != w || height != h;
+
+								if (graph.view.scale != s || graph.view.translate.x != tr.x || graph.view.translate.y != tr.y ||
+									gs != graph.gridSize || sizeChanged)
+								{
+									tr = graph.view.translate.clone();
+									s = graph.view.scale;
+									gs = graph.gridSize;
+									w = width;
+									h = height;
+
+									// Clears the background if required
+									if (!sizeChanged)
+									{
+										ctx.clearRect(0, 0, w, h);
+									}
+									else
+									{
+										canvas.setAttribute('width', w);
+										canvas.setAttribute('height', h);
+									}
+
+									var tx = tr.x * s;
+									var ty = tr.y * s;
+
+									// Sets the distance of the grid lines in pixels
+									var minStepping = graph.gridSize;
+									var stepping = minStepping * s;
+
+									if (stepping < minStepping)
+									{
+										var count = Math.round(Math.ceil(minStepping / stepping) / 2) * 2;
+										stepping = count * stepping;
+									}
+
+									var xs = Math.floor((0 - tx) / stepping) * stepping + tx;
+									var xe = Math.ceil(w / stepping) * stepping;
+									var ys = Math.floor((0 - ty) / stepping) * stepping + ty;
+									var ye = Math.ceil(h / stepping) * stepping;
+
+									xe += Math.ceil(stepping);
+									ye += Math.ceil(stepping);
+
+									var ixs = Math.round(xs);
+									var ixe = Math.round(xe);
+									var iys = Math.round(ys);
+									var iye = Math.round(ye);
+
+									// Draws the actual grid
+									ctx.strokeStyle = '#f6f6f6';
+									ctx.beginPath();
+
+									for (var x = xs; x <= xe; x += stepping)
+									{
+										x = Math.round((x - tx) / stepping) * stepping + tx;
+										var ix = Math.round(x);
+
+										ctx.moveTo(ix + 0.5, iys + 0.5);
+										ctx.lineTo(ix + 0.5, iye + 0.5);
+									}
+
+									for (var y = ys; y <= ye; y += stepping)
+									{
+										y = Math.round((y - ty) / stepping) * stepping + ty;
+										var iy = Math.round(y);
+
+										ctx.moveTo(ixs + 0.5, iy + 0.5);
+										ctx.lineTo(ixe + 0.5, iy + 0.5);
+									}
+
+									ctx.closePath();
+									ctx.stroke();
+								}
+							}
+						};
+					}
+					catch (e)
+					{
+						//mxLog.show();
+						//mxLog.debug('Using background image');
+
+						//container.style.backgroundImage = 'url(\'editors/images/grid.gif\')';
+					}
+
+					var mxGraphViewValidateBackground = mxGraphView.prototype.validateBackground;
+					mxGraphView.prototype.validateBackground = function()
+					{
+						mxGraphViewValidateBackground.apply(this, arguments);
+						repaintGrid();
+					};
+				})();
+
 
   if (!mxClient.isBrowserSupported()) {
     mxUtils.error('Browser Not Supported');
   } else {
     graph.getModel().beginUpdate();
     try {
-      var v1 = graph.insertVertex(parent, null, "F", 20, 20, 80, 30); //x,y,width,height
-      var v2 = graph.insertVertex(parent, null, "S", 20, 120, 80, 30); //x,y,width,height
-      var e1 = graph.insertEdge(parent, null, "joins to", v1, v2);
+      //removed default vertex
+      addFSBVertex(container, 1);
     } catch (e) {
 
     } finally {
