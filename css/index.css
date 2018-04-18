@@ -24,6 +24,10 @@
   display: inline-block;
 }
 
+canvas {
+  background-color: antiquewhite;
+}
+
 .tool-pal {
   background-color: steelblue;
   color: black;
