@@ -1,5 +1,7 @@
 var x = 60,
-  y = 60;
+  y = 60,
+  p = 150,
+  q = 100;
 var graph;
 var parent;
 
@@ -22,27 +24,87 @@ function zoomOut() {
   graph.zoomOut();
 }
 
-// function addFSBEdge(container, token) {
-//   new mxRubberband(graph);
-//   graph.getModel().beginUpdate();
-//   try {
-//     if (token == 1) {
-//       console.log('hello');
-//       // Implements the connect preview
-//       				graph.connectionHandler.createEdgeState = function(me)
-//       				{
-//       					var edge = graph.createEdge(null, null, null, null, null);
-//
-//       					return new mxCellState(this.graph.view, edge, this.graph.getCellStyle(edge));
-//       				};
-//       console.log('bye');
-//     }
-//   } catch (e) {
-//
-//   } finally {
-//     graph.getModel().endUpdate();
-//   }
-// }
+function addFSBEdge(container, token) {
+  new mxRubberband(graph);
+  graph.getModel().beginUpdate();
+  try {
+    if (token == 1) {
+      // console.log('hello');
+      p = 150;
+      parent = graph.getDefaultParent();
+      var cell = new mxCell('consist of', new mxGeometry(0, 7, 50, 50), 'curved=1;endArrow=classic;html=1;');
+      cell.geometry.setTerminalPoint(new mxPoint(p, q), true);
+      p += 100;
+      cell.geometry.setTerminalPoint(new mxPoint(p, q), false);
+      // p+=50;
+      q += 20;
+      // cell.geometry.points = [new mxPoint(50, 50), new mxPoint(0, 0)];
+      cell.geometry.relative = true;
+      cell.edge = true;
+
+      cell = graph.addCell(cell);
+      graph.fireEvent(new mxEventObject('cellsInserted', 'cells', [cell]));
+      // console.log('bye');
+      var style = graph.getStylesheet().getDefaultEdgeStyle();
+
+    } else if (token == 2) {
+      // console.log('hello');
+      p = 150;
+      parent = graph.getDefaultParent();
+      var cell = new mxCell('realized by', new mxGeometry(0, 7, 50, 50), 'curved=1;endArrow=classic;html=1;');
+      cell.geometry.setTerminalPoint(new mxPoint(p, q), true);
+      p += 100;
+      cell.geometry.setTerminalPoint(new mxPoint(p, q), false);
+      // p+=50;
+      q += 20;
+      // cell.geometry.points = [new mxPoint(50, 50), new mxPoint(0, 0)];
+      cell.geometry.relative = true;
+      cell.edge = true;
+
+      cell = graph.addCell(cell);
+      graph.fireEvent(new mxEventObject('cellsInserted', 'cells', [cell]));
+      // console.log('bye');
+    } else if (token == 3) {
+      // console.log('hello');
+      p = 150;
+      parent = graph.getDefaultParent();
+      var cell = new mxCell('realized as', new mxGeometry(0, 7, 50, 50), 'curved=1;endArrow=classic;html=1;');
+      cell.geometry.setTerminalPoint(new mxPoint(p, q), true);
+      p+=100;
+      cell.geometry.setTerminalPoint(new mxPoint(p, q), false);
+      // p+=50;
+      q+=20;
+      // cell.geometry.points = [new mxPoint(50, 50), new mxPoint(0, 0)];
+      cell.geometry.relative = true;
+      cell.edge = true;
+
+      cell = graph.addCell(cell);
+      graph.fireEvent(new mxEventObject('cellsInserted', 'cells', [cell]));
+      // console.log('bye');
+    } else if (token == 4) {
+      // console.log('hello');
+      p = 150;
+      parent = graph.getDefaultParent();
+      var cell = new mxCell('utilized by', new mxGeometry(0, 7, 50, 50), 'curved=1;endArrow=classic;html=1;');
+      cell.geometry.setTerminalPoint(new mxPoint(p, q), true);
+      p+=100;
+      cell.geometry.setTerminalPoint(new mxPoint(p, q), false);
+      // p+=50;
+      q+=20;
+      // cell.geometry.points = [new mxPoint(50, 50), new mxPoint(0, 0)];
+      cell.geometry.relative = true;
+      cell.edge = true;
+
+      cell = graph.addCell(cell);
+      graph.fireEvent(new mxEventObject('cellsInserted', 'cells', [cell]));
+      // console.log('bye');
+    }
+  } catch (e) {
+
+  } finally {
+    graph.getModel().endUpdate();
+  }
+}
 
 function addFSBVertex(container, token) {
   //var graph = new mxGraph(container);
