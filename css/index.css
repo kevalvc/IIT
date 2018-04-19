@@ -1,3 +1,7 @@
+.header-placer {
+  display: contents;
+}
+
 .main-data {
   /* border: 2px solid red; */
   padding-left: 0px;
@@ -114,5 +118,5 @@ canvas {
 }
 
 .smallbreak {
-  
+
 }

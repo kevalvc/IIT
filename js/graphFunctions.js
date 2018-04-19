@@ -13,6 +13,7 @@ function deleteCells() {
 
 function clearAll() {
   graph.removeCells(graph.getChildVertices(graph.getDefaultParent()));
+  graph.removeCells(graph.getChildEdges(graph.getDefaultParent()));
   y = 60;
 }
 
@@ -24,8 +25,23 @@ function zoomOut() {
   graph.zoomOut();
 }
 
+function orderize() {
+  var layout = new mxHierarchicalLayout(graph);
+
+  parent = graph.getDefaultParent();
+
+  // Adds a button to execute the layout
+  var button = document.getElementById('heirarchical');
+  mxUtils.write(button, 'Hierarchical');
+  mxEvent.addListener(button, 'click', function(evt) {
+    layout.execute(parent);
+  });
+}
+
 function addFSBEdge(container, token) {
   new mxRubberband(graph);
+  new mxKeyHandler(graph);
+
   graph.getModel().beginUpdate();
   try {
     if (token == 1) {
@@ -70,10 +86,10 @@ function addFSBEdge(container, token) {
       parent = graph.getDefaultParent();
       var cell = new mxCell('realized as', new mxGeometry(0, 7, 50, 50), 'curved=1;endArrow=classic;html=1;');
       cell.geometry.setTerminalPoint(new mxPoint(p, q), true);
-      p+=100;
+      p += 100;
       cell.geometry.setTerminalPoint(new mxPoint(p, q), false);
       // p+=50;
-      q+=20;
+      q += 20;
       // cell.geometry.points = [new mxPoint(50, 50), new mxPoint(0, 0)];
       cell.geometry.relative = true;
       cell.edge = true;
@@ -87,10 +103,10 @@ function addFSBEdge(container, token) {
       parent = graph.getDefaultParent();
       var cell = new mxCell('utilized by', new mxGeometry(0, 7, 50, 50), 'curved=1;endArrow=classic;html=1;');
       cell.geometry.setTerminalPoint(new mxPoint(p, q), true);
-      p+=100;
+      p += 100;
       cell.geometry.setTerminalPoint(new mxPoint(p, q), false);
       // p+=50;
-      q+=20;
+      q += 20;
       // cell.geometry.points = [new mxPoint(50, 50), new mxPoint(0, 0)];
       cell.geometry.relative = true;
       cell.edge = true;
@@ -110,6 +126,8 @@ function addFSBVertex(container, token) {
   //var graph = new mxGraph(container);
   //var parent = graph.getDefaultParent();
   new mxRubberband(graph);
+  new mxKeyHandler(graph);
+
   //graph.setEnabled(false);
 
   graph.getModel().beginUpdate();
@@ -153,6 +171,23 @@ function addFSBVertex(container, token) {
     graph.getModel().endUpdate();
   }
 };
+
+function __Draw() {
+  var encoder = new mxCodec();
+  var result = encoder.encode(graph.getModel());
+  var xml = encodeURIComponent(mxUtils.getXml(result));
+  // var xml = mxUtils.getXml(EditorUi.editor.getGraphXml());
+  // console.log('xml');
+  console.log(xml);
+  mxUtils.popup(mxUtils.getPrettyXml(xml), true);
+  // var doc = mxUtils.createXmlDocument();
+}
+
+document.body.appendChild(mxUtils.button('View XML', function() {
+  var encoder = new mxCodec();
+  var node = encoder.encode(graph.getModel());
+  mxUtils.popup(mxUtils.getPrettyXml(node), true);
+}));
 
 function main(container) {
   graph = new mxGraph(container);
@@ -265,6 +300,7 @@ function main(container) {
           }
         }
       };
+      orderize();
     } catch (e) {
       //mxLog.show();
       //mxLog.debug('Using background image');
@@ -283,6 +319,7 @@ function main(container) {
   if (!mxClient.isBrowserSupported()) {
     mxUtils.error('Browser Not Supported');
   } else {
+    var doc = mxUtils.createXmlDocument();
     graph.getModel().beginUpdate();
     try {
       //removed default vertex
