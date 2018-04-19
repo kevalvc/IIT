@@ -38,6 +38,14 @@ function orderize() {
   });
 }
 
+function textSelection(container) {
+  console.log("ge");
+
+  
+
+  console.log("mmn");
+}
+
 function addFSBEdge(container, token) {
   new mxRubberband(graph);
   new mxKeyHandler(graph);
@@ -190,11 +198,48 @@ document.body.appendChild(mxUtils.button('View XML', function() {
 }));
 
 function main(container) {
+
+  // ********************************************************************************************************************************************************
+  // ********************************************************************************************************************************************************
+  var textEditing = mxUtils.bind(this, function(evt) {
+    return graph.isEditing();
+  });
+  container.onselectstart = textEditing;
+  container.onmousedown = textEditing;
+  if (mxClient.IS_IE && (typeof(document.documentMode) === 'undefined' || document.documentMode < 9)) {
+    mxEvent.addListener(container, 'contextmenu', textEditing);
+  } else {
+    container.oncontextmenu = textEditing;
+  }
+  // ********************************************************************************************************************************************************
+  // ********************************************************************************************************************************************************
+
   graph = new mxGraph(container);
   parent = graph.getDefaultParent();
-  new mxRubberband(graph);
+  graph.centerZoom = false;
+  graph.setConnectable(true);
+  graph.setPanning(true);
+
+  var rubberband = new mxRubberband(graph);
   // graph.maximumGraphBounds = new mxRectangle(0, 0, parseInt($('.main-ws').width()), parseInt($('.main-ws').height()));
   var style = graph.getStylesheet().getDefaultVertexStyle();
+  graph.addListener(mxEvent.TAP_AND_HOLD, function(sender, evt) {
+    if (!mxEvent.isMultiTouchEvent(evt)) {
+      var me = evt.getProperty('event');
+      var cell = evt.getProperty('cell');
+
+      if (cell == null) {
+        var pt = mxUtils.convertPoint(this.container,
+          mxEvent.getClientX(me), mxEvent.getClientY(me));
+        rubberband.start(pt.x, pt.y);
+      } else if (graph.getSelectionCount() > 1 && graph.isCellSelected(cell)) {
+        graph.removeSelectionCell(cell);
+      }
+
+      // Blocks further processing of the event
+      evt.consume();
+    }
+  });
   //graph.setEnabled(false);
   // var style = graph.getStylesheet().getDefaultVertexStyle();
   //   style[mxConstants.STYLE_SHAPE] = 'box';
@@ -300,6 +345,7 @@ function main(container) {
           }
         }
       };
+      textSelection(container);
       orderize();
     } catch (e) {
       //mxLog.show();
