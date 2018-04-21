@@ -29,6 +29,8 @@ function orderize() {
   var layout = new mxHierarchicalLayout(graph);
 
   parent = graph.getDefaultParent();
+  console.log("Parent ");
+  console.log(parent);
 
   // Adds a button to execute the layout
   var button = document.getElementById('heirarchical');
@@ -41,7 +43,7 @@ function orderize() {
 function textSelection(container) {
   console.log("ge");
 
-  
+
 
   console.log("mmn");
 }
@@ -123,6 +125,7 @@ function addFSBEdge(container, token) {
       graph.fireEvent(new mxEventObject('cellsInserted', 'cells', [cell]));
       // console.log('bye');
     }
+    orderize();
   } catch (e) {
 
   } finally {
@@ -173,6 +176,7 @@ function addFSBVertex(container, token) {
       style[mxConstants.STYLE_FILLCOLOR] = '#fe5';
 
     }
+    orderize();
   } catch (e) {
 
   } finally {
@@ -220,9 +224,11 @@ function main(container) {
   graph.setConnectable(true);
   graph.setPanning(true);
 
-  var rubberband = new mxRubberband(graph);
+  new mxRubberband(graph);
+
   // graph.maximumGraphBounds = new mxRectangle(0, 0, parseInt($('.main-ws').width()), parseInt($('.main-ws').height()));
   var style = graph.getStylesheet().getDefaultVertexStyle();
+
   graph.addListener(mxEvent.TAP_AND_HOLD, function(sender, evt) {
     if (!mxEvent.isMultiTouchEvent(evt)) {
       var me = evt.getProperty('event');
@@ -240,6 +246,10 @@ function main(container) {
       evt.consume();
     }
   });
+
+  textSelection(container);
+  orderize();
+
   //graph.setEnabled(false);
   // var style = graph.getStylesheet().getDefaultVertexStyle();
   //   style[mxConstants.STYLE_SHAPE] = 'box';
@@ -345,8 +355,6 @@ function main(container) {
           }
         }
       };
-      textSelection(container);
-      orderize();
     } catch (e) {
       //mxLog.show();
       //mxLog.debug('Using background image');
