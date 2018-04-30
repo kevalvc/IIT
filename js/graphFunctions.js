@@ -98,6 +98,7 @@ function orderize() {
   var button = document.getElementById('heirarchical');
   mxUtils.write(button, 'Hierarchical');
   mxEvent.addListener(button, 'click', function(evt) {
+    graph.refresh();
     layout.execute(parent);
   });
 }
@@ -277,22 +278,34 @@ document.body.appendChild(mxUtils.button('Import', function() {
   console.log("Inside loadXML");
   var style = graph.getStylesheet().getDefaultVertexStyle();
 
-var doc = mxUtils.parseXml(' <root><mxCell id="0"/><mxCell id="1" parent="0"/><mxCell id="2" value="F" style="fillColor=#45afe3;shape=ellipse" vertex="1" parent="1"><mxGeometry x="60" y="60" width="80" height="80" as="geometry"/></mxCell><mxCell id="3" value="S" style="fillColor=#ffa500;shape=hexagon" vertex="1" parent="1"><mxGeometry x="170" y="310" width="80" height="70" as="geometry"/></mxCell><mxCell id="4" value="consist of" style="curved=1;endArrow=classic;html=1;" edge="1" parent="1" source="2" target="3"><mxGeometry y="7" width="50" height="50" relative="1" as="geometry"><mxPoint x="150" y="100" as="sourcePoint"/><mxPoint x="250" y="100" as="targetPoint"/></mxGeometry></mxCell></root>');
+var doc = mxUtils.parseXml('<root><mxCell id="0"/><mxCell id="1" parent="0"/><mxCell id="2" value="F" style="fillColor=#45afe3;shape=ellipse" vertex="1" parent="1"><mxGeometry x="60" y="60" width="80" height="80" as="geometry"/></mxCell><mxCell id="3" value="S" style="fillColor=#ffa500;shape=hexagon" vertex="1" parent="1"><mxGeometry x="170" y="310" width="80" height="70" as="geometry"/></mxCell><mxCell id="4" value="consist of" style="curved=1;endArrow=classic;html=1;" edge="1" parent="1" source="2" target="3"><mxGeometry y="7" width="50" height="50" relative="1" as="geometry"><mxPoint x="150" y="100" as="sourcePoint"/><mxPoint x="250" y="100" as="targetPoint"/></mxGeometry></mxCell></root>');
 
 //var doc = mxUtils.parseXml(xml);
                    var codec = new mxCodec(doc);
                    var elt = doc.documentElement.firstChild;
                    var cells = [];
                    while (elt != null){
-                     cells.push(codec.decodeCell(elt));
+
+                     // cells.push(codec.decodeCell(elt));
+                    if(codec.decodeCell(elt).isVertex())
+                    {
+                      console.log("Vertex!!");
+                      graph.addCell(codec.decodeCell(elt));
+                    }
+
+                    if(codec.decodeCell(elt).isEdge())
+                    {
+                    console.log("Edge!!");
+                    graph.addCell(codec.decodeCell(elt));
+                    }
                        graph.refresh();
                      elt = elt.nextSibling;
                    }
-                //elt.setAttribute("")
-                var style = graph.getStylesheet().getDefaultVertexStyle();
+               //     graph.getModel().beginUpdate();
+               //
+               // graph.addCells(cells);
+               // graph.getModel().endUpdate();
 
-                //style[mxConstants.STYLE_SHAPE] = mxConstants.SHAPE_HEXAGON;
-               this.graph.addCells(cells);
 
 }));
 
