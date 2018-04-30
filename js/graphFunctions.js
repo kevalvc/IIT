@@ -40,14 +40,6 @@ function orderize() {
   });
 }
 
-function textSelection(container) {
-  console.log("ge");
-
-
-
-  console.log("mmn");
-}
-
 function addFSBEdge(container, token) {
   new mxRubberband(graph);
   new mxKeyHandler(graph);
@@ -226,6 +218,10 @@ function main(container) {
 
   new mxRubberband(graph);
 
+  mxConstants.HANDLE_FILLCOLOR = '#99ccff';
+  mxConstants.HANDLE_STROKECOLOR = '#0088cf';
+  mxConstants.VERTEX_SELECTION_COLOR = '#00a8ff';
+
   // graph.maximumGraphBounds = new mxRectangle(0, 0, parseInt($('.main-ws').width()), parseInt($('.main-ws').height()));
   var style = graph.getStylesheet().getDefaultVertexStyle();
 
@@ -247,7 +243,6 @@ function main(container) {
     }
   });
 
-  textSelection(container);
   orderize();
 
   //graph.setEnabled(false);
