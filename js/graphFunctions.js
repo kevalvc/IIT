@@ -2,9 +2,7 @@ var x = 60,
   y = 60,
   p = 150,
   q = 100;
-var graph;
-var parent;
-
+var graph, parent, xml;
 
 function download(filename, text) {
   var element = document.createElement('a');
@@ -24,7 +22,7 @@ document.body.appendChild(mxUtils.button('Download', function() {
   node = encoder.encode(graph.getModel());
   mxUtils.popup(mxUtils.getPrettyXml(node), true);
 
-  download("hello.txt",mxUtils.getPrettyXml(node));
+  download("hello.txt", mxUtils.getPrettyXml(node));
 
 }));
 
@@ -206,7 +204,7 @@ function addFSBVertex(container, token) {
       //var a = node.getAttribute('style');
       //console.log(a);
       // graph.insertVertex(parent, null, node, x, y, 80, 30);
-      var v1 = graph.insertVertex(parent, null, "F", x, y, 80, 80,'fillColor=#45afe3;shape=ellipse'); //x,y,width,height
+      var v1 = graph.insertVertex(parent, null, "F", x, y, 80, 80, 'fillColor=#45afe3;shape=ellipse'); //x,y,width,height
       y = y + 40;
       var style = graph.getStylesheet().getDefaultVertexStyle();
       // style[mxConstants.STYLE_SHAPE] = mxConstants.SHAPE_ELLIPSE;
@@ -217,7 +215,7 @@ function addFSBVertex(container, token) {
       // style[mxConstants.STYLE_GRADIENTCOLOR] = '#70c4ed';
     } else
     if (token == 2) {
-      var v2 = graph.insertVertex(parent, null, "S", x, y, 80, 70,'fillColor=#ffa500;shape=hexagon'); //x,y,width,height
+      var v2 = graph.insertVertex(parent, null, "S", x, y, 80, 70, 'fillColor=#ffa500;shape=hexagon'); //x,y,width,height
       y = y + 40;
       // var style = graph.getStylesheet().getDefaultVertexStyle();
       // style[mxConstants.STYLE_SHAPE] = mxConstants.SHAPE_HEXAGON;
@@ -227,7 +225,7 @@ function addFSBVertex(container, token) {
       // style[mxConstants.STYLE_FILLCOLOR] = '#ffa500';
 
     } else {
-      var v3 = graph.insertVertex(parent, null, "B", x, y, 80, 40,'fillColor=#fe5;shape=rectangle'); //x,y,width,height
+      var v3 = graph.insertVertex(parent, null, "B", x, y, 80, 40, 'fillColor=#fe5;shape=rectangle'); //x,y,width,height
       y = y + 40;
       // var style = graph.getStylesheet().getDefaultVertexStyle();
       // style[mxConstants.STYLE_SHAPE] = mxConstants.SHAPE_RECTANGLE;
@@ -249,10 +247,10 @@ function addFSBVertex(container, token) {
 function __Draw() {
   var encoder = new mxCodec();
   var result = encoder.encode(graph.getModel());
-  var xml = encodeURIComponent(mxUtils.getXml(result));
+  xml = encodeURIComponent(mxUtils.getXml(result));
   // var xml = mxUtils.getXml(EditorUi.editor.getGraphXml());
   // console.log('xml');
-//console.log(xml);
+  //console.log(xml);
   mxUtils.popup(mxUtils.getPrettyXml(xml), true);
   // var doc = mxUtils.createXmlDocument();
 }
@@ -269,22 +267,26 @@ document.body.appendChild(mxUtils.button('Import', function() {
   console.log("Inside loadXML");
   var style = graph.getStylesheet().getDefaultVertexStyle();
 
-var doc = mxUtils.parseXml(' <root><mxCell id="0"/><mxCell id="1" parent="0"/><mxCell id="2" value="F" style="fillColor=#45afe3;shape=ellipse" vertex="1" parent="1"><mxGeometry x="60" y="60" width="80" height="80" as="geometry"/></mxCell><mxCell id="3" value="S" style="fillColor=#ffa500;shape=hexagon" vertex="1" parent="1"><mxGeometry x="170" y="310" width="80" height="70" as="geometry"/></mxCell><mxCell id="4" value="consist of" style="curved=1;endArrow=classic;html=1;" edge="1" parent="1" source="2" target="3"><mxGeometry y="7" width="50" height="50" relative="1" as="geometry"><mxPoint x="150" y="100" as="sourcePoint"/><mxPoint x="250" y="100" as="targetPoint"/></mxGeometry></mxCell></root>');
+  var doc = mxUtils.parseXml(' <root><mxCell id="0"/><mxCell id="1" parent="0"/><mxCell id="2" value="F" style="fillColor=#45afe3;shape=ellipse" vertex="1" parent="1"><mxGeometry x="60" y="60" width="80" height="80" as="geometry"/></mxCell><mxCell id="3" value="S" style="fillColor=#ffa500;shape=hexagon" vertex="1" parent="1"><mxGeometry x="170" y="310" width="80" height="70" as="geometry"/></mxCell><mxCell id="4" value="consist of" style="curved=1;endArrow=classic;html=1;" edge="1" parent="1" source="2" target="3"><mxGeometry y="7" width="50" height="50" relative="1" as="geometry"><mxPoint x="150" y="100" as="sourcePoint"/><mxPoint x="250" y="100" as="targetPoint"/></mxGeometry></mxCell></root>');
 
-//var doc = mxUtils.parseXml(xml);
-                   var codec = new mxCodec(doc);
-                   var elt = doc.documentElement.firstChild;
-                   var cells = [];
-                   while (elt != null){
-                     cells.push(codec.decodeCell(elt));
-                       graph.refresh();
-                     elt = elt.nextSibling;
-                   }
-                //elt.setAttribute("")
-                var style = graph.getStylesheet().getDefaultVertexStyle();
+  clearAll();
 
-                //style[mxConstants.STYLE_SHAPE] = mxConstants.SHAPE_HEXAGON;
-               this.graph.addCells(cells);
+  //var doc = mxUtils.parseXml(xml);
+  var codec = new mxCodec(doc);
+  var elt = doc.documentElement.firstChild;
+  var cells = [];
+  while (elt != null) {
+    cells.push(codec.decodeCell(elt));
+    graph.refresh();
+    elt = elt.nextSibling;
+  }
+  //elt.setAttribute("")
+  var style = graph.getStylesheet().getDefaultVertexStyle();
+
+  //style[mxConstants.STYLE_SHAPE] = mxConstants.SHAPE_HEXAGON;
+  this.graph.addCells(cells);
+
+  orderize();
 
 }));
 
@@ -314,10 +316,6 @@ function main(container) {
   graph.setPanning(true);
 
   new mxRubberband(graph);
-
-  mxConstants.HANDLE_FILLCOLOR = '#99ccff';
-  mxConstants.HANDLE_STROKECOLOR = '#0088cf';
-  mxConstants.VERTEX_SELECTION_COLOR = '#00a8ff';
 
   // graph.maximumGraphBounds = new mxRectangle(0, 0, parseInt($('.main-ws').width()), parseInt($('.main-ws').height()));
   var style = graph.getStylesheet().getDefaultVertexStyle();
