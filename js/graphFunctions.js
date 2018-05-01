@@ -2,7 +2,17 @@ var x = 60,
   y = 60,
   p = 150,
   q = 100;
-var graph, parent, xml;
+var graph;
+var parent;
+var undoManager;
+
+function undoChange(){
+    undoManager.undo();
+}
+
+function redoChange(){
+  undoManager.redo();
+}
 
 
 function download(filename, text) {
@@ -23,7 +33,7 @@ document.body.appendChild(mxUtils.button('Download', function() {
   node = encoder.encode(graph.getModel());
   mxUtils.popup(mxUtils.getPrettyXml(node), true);
 
-  download("hello.txt", mxUtils.getPrettyXml(node));
+  download("hello.xml",mxUtils.getPrettyXml(node));
 
 }));
 
@@ -214,7 +224,7 @@ function addFSBVertex(container, token) {
       //var a = node.getAttribute('style');
       //console.log(a);
       // graph.insertVertex(parent, null, node, x, y, 80, 30);
-      var v1 = graph.insertVertex(parent, null, "F", x, y, 80, 80, 'fillColor=#45afe3;shape=ellipse'); //x,y,width,height
+      var v1 = graph.insertVertex(parent, null, "F", x, y, 80, 80,'fillColor=#45afe3;shape=ellipse'); //x,y,width,height
       y = y + 40;
       var style = graph.getStylesheet().getDefaultVertexStyle();
       // style[mxConstants.STYLE_SHAPE] = mxConstants.SHAPE_ELLIPSE;
@@ -225,7 +235,7 @@ function addFSBVertex(container, token) {
       // style[mxConstants.STYLE_GRADIENTCOLOR] = '#70c4ed';
     } else
     if (token == 2) {
-      var v2 = graph.insertVertex(parent, null, "S", x, y, 80, 70, 'fillColor=#ffa500;shape=hexagon'); //x,y,width,height
+      var v2 = graph.insertVertex(parent, null, "S", x, y, 80, 70,'fillColor=#ffa500;shape=hexagon'); //x,y,width,height
       y = y + 40;
       // var style = graph.getStylesheet().getDefaultVertexStyle();
       // style[mxConstants.STYLE_SHAPE] = mxConstants.SHAPE_HEXAGON;
@@ -235,7 +245,7 @@ function addFSBVertex(container, token) {
       // style[mxConstants.STYLE_FILLCOLOR] = '#ffa500';
 
     } else {
-      var v3 = graph.insertVertex(parent, null, "B", x, y, 80, 40, 'fillColor=#fe5;shape=rectangle'); //x,y,width,height
+      var v3 = graph.insertVertex(parent, null, "B", x, y, 80, 40,'fillColor=#fe5;shape=rectangle'); //x,y,width,height
       y = y + 40;
       // var style = graph.getStylesheet().getDefaultVertexStyle();
       // style[mxConstants.STYLE_SHAPE] = mxConstants.SHAPE_RECTANGLE;
@@ -257,10 +267,10 @@ function addFSBVertex(container, token) {
 function __Draw() {
   var encoder = new mxCodec();
   var result = encoder.encode(graph.getModel());
-  xml = encodeURIComponent(mxUtils.getXml(result));
+  var xml = encodeURIComponent(mxUtils.getXml(result));
   // var xml = mxUtils.getXml(EditorUi.editor.getGraphXml());
   // console.log('xml');
-  //console.log(xml);
+//console.log(xml);
   mxUtils.popup(mxUtils.getPrettyXml(xml), true);
   // var doc = mxUtils.createXmlDocument();
 }
@@ -269,41 +279,46 @@ document.body.appendChild(mxUtils.button('View XML', function() {
   var encoder = new mxCodec();
   var node = encoder.encode(graph.getModel());
   mxUtils.popup(mxUtils.getPrettyXml(node), true);
+
+  var xmlString = mxUtils.getPrettyXml(node);
+  console.log(xmlString);
+  xmlString = xmlString.trim();
+  console.log(xmlString);
 }));
 
 document.body.appendChild(mxUtils.button('Import', function() {
 
-  // console.log("Olaaaaaa");
-  // console.log("Inside loadXML");
+  console.log("Olaaaaaa");
+  console.log("Inside loadXML");
   var style = graph.getStylesheet().getDefaultVertexStyle();
 
-  clearAll();
+var doc = mxUtils.parseXml('<root><mxCell id="0"/><mxCell id="1" parent="0"/><mxCell id="2" value="F" style="fillColor=#45afe3;shape=ellipse" vertex="1" parent="1"><mxGeometry x="60" y="60" width="80" height="80" as="geometry"/></mxCell><mxCell id="3" value="S" style="fillColor=#ffa500;shape=hexagon" vertex="1" parent="1"><mxGeometry x="170" y="310" width="80" height="70" as="geometry"/></mxCell><mxCell id="4" value="consist of" style="curved=1;endArrow=classic;html=1;" edge="1" parent="1" source="2" target="3"><mxGeometry y="7" width="50" height="50" relative="1" as="geometry"><mxPoint x="150" y="100" as="sourcePoint"/><mxPoint x="250" y="100" as="targetPoint"/></mxGeometry></mxCell></root>');
 
-  var doc = mxUtils.parseXml('<root><mxCell id="0"/><mxCell id="1" parent="0"/><mxCell id="2" value="F" style="fillColor=#45afe3;shape=ellipse" vertex="1" parent="1"><mxGeometry x="60" y="60" width="80" height="80" as="geometry"/></mxCell><mxCell id="3" value="S" style="fillColor=#ffa500;shape=hexagon" vertex="1" parent="1"><mxGeometry x="170" y="310" width="80" height="70" as="geometry"/></mxCell><mxCell id="4" value="consist of" style="curved=1;endArrow=classic;html=1;" edge="1" parent="1" source="2" target="3"><mxGeometry y="7" width="50" height="50" relative="1" as="geometry"><mxPoint x="150" y="100" as="sourcePoint"/><mxPoint x="250" y="100" as="targetPoint"/></mxGeometry></mxCell></root>');
+//var doc = mxUtils.parseXml(xml);
+                   var codec = new mxCodec(doc);
+                   var elt = doc.documentElement.firstChild;
+                   var cells = [];
+                   while (elt != null){
 
-  //var doc = mxUtils.parseXml(xml);
-  var codec = new mxCodec(doc);
-  var elt = doc.documentElement.firstChild;
-  var cells = [];
-  while (elt != null) {
+                     // cells.push(codec.decodeCell(elt));
+                    if(codec.decodeCell(elt).isVertex())
+                    {
+                      console.log("Vertex!!");
+                      graph.addCell(codec.decodeCell(elt));
+                    }
 
-    // cells.push(codec.decodeCell(elt));
-    if (codec.decodeCell(elt).isVertex()) {
-      console.log("Vertex!!");
-      graph.addCell(codec.decodeCell(elt));
-    }
-
-    if (codec.decodeCell(elt).isEdge()) {
-      console.log("Edge!!");
-      graph.addCell(codec.decodeCell(elt));
-    }
-    graph.refresh();
-    elt = elt.nextSibling;
-  }
-  //     graph.getModel().beginUpdate();
-  //
-  // graph.addCells(cells);
-  // graph.getModel().endUpdate();
+                    if(codec.decodeCell(elt).isEdge())
+                    {
+                    console.log("Edge!!");
+                    graph.addCell(codec.decodeCell(elt));
+                    }
+                       graph.refresh();
+                     elt = elt.nextSibling;
+                   }
+               //     graph.getModel().beginUpdate();
+               //
+               // graph.addCells(cells);
+               // graph.getModel().endUpdate();
 }));
 
 function main(container) {
@@ -330,6 +345,13 @@ function main(container) {
   graph.centerZoom = false;
   graph.setConnectable(true);
   graph.setPanning(true);
+  undoManager = new mxUndoManager();
+  var listener = function(sender, evt)
+    {
+      undoManager.undoableEditHappened(evt.getProperty('edit'));
+    };
+graph.getModel().addListener(mxEvent.UNDO, listener);
+graph.getView().addListener(mxEvent.UNDO, listener);
 
   new mxRubberband(graph);
 

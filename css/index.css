@@ -24,6 +24,14 @@
   width: auto;
 }
 
+.autolay {
+  margin-bottom: 5px;
+}
+
+.btn-in {
+  margin-left: 19px;
+}
+
 .my-navbar {
   background-color: purple;
   padding-top: 25px;
@@ -134,5 +142,4 @@ canvas {
 }
 
 .smallbreak {
-
 }
