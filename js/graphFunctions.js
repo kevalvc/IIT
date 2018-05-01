@@ -4,6 +4,15 @@ var x = 60,
   q = 100;
 var graph;
 var parent;
+var undoManager;
+
+function undoChange(){
+    undoManager.undo();
+}
+
+function redoChange(){
+  undoManager.redo();
+}
 
 
 function download(filename, text) {
@@ -24,7 +33,7 @@ document.body.appendChild(mxUtils.button('Download', function() {
   node = encoder.encode(graph.getModel());
   mxUtils.popup(mxUtils.getPrettyXml(node), true);
 
-  download("hello.txt",mxUtils.getPrettyXml(node));
+  download("hello.xml",mxUtils.getPrettyXml(node));
 
 }));
 
@@ -270,6 +279,11 @@ document.body.appendChild(mxUtils.button('View XML', function() {
   var encoder = new mxCodec();
   var node = encoder.encode(graph.getModel());
   mxUtils.popup(mxUtils.getPrettyXml(node), true);
+
+  var xmlString = mxUtils.getPrettyXml(node);
+  console.log(xmlString);
+  xmlString = xmlString.trim();
+  console.log(xmlString);
 }));
 
 document.body.appendChild(mxUtils.button('Import', function() {
@@ -307,6 +321,7 @@ var doc = mxUtils.parseXml('<root><mxCell id="0"/><mxCell id="1" parent="0"/><mx
                // graph.getModel().endUpdate();
 
 
+
 }));
 
 function main(container) {
@@ -333,6 +348,13 @@ function main(container) {
   graph.centerZoom = false;
   graph.setConnectable(true);
   graph.setPanning(true);
+  undoManager = new mxUndoManager();
+  var listener = function(sender, evt)
+    {
+      undoManager.undoableEditHappened(evt.getProperty('edit'));
+    };
+graph.getModel().addListener(mxEvent.UNDO, listener);
+graph.getView().addListener(mxEvent.UNDO, listener);
 
   new mxRubberband(graph);
 
