@@ -16,6 +16,20 @@ function redoChange(){
   undoManager.redo();
 }
 
+function importXML(){
+  var xml = '<mxGraphModel><root><mxCell id="0"/><mxCell id="1" parent="0"/><mxCell id="2" value="F" style="fillColor=#45afe3;shape=ellipse;" vertex="1" parent="1"><mxGeometry x="60" y="60" width="80" height="80" as="geometry"/></mxCell><mxCell id="3" value="S" style="fillColor=#ffa500;shape=hexagon;" vertex="1" parent="1"><mxGeometry x="220" y="200" width="80" height="70" as="geometry"/></mxCell><mxCell id="4" value="consist of" style="curved=1;endArrow=classic;html=1;" edge="1" parent="1" source="2" target="3"><mxGeometry y="7" width="50" height="50" relative="1" as="geometry"><mxPoint x="150" y="100" as="sourcePoint"/><mxPoint x="250" y="100" as="targetPoint"/></mxGeometry></mxCell></root></mxGraphModel>';
+
+var doc = mxUtils.parseXml(xml);
+var codec = new mxCodec(doc);
+codec.decode(doc.documentElement, graph.getModel());
+orderize();
+}
+
+function downloadXML(){
+  var encoder = new mxCodec();
+  var node = encoder.encode(graph.getModel());
+  download("hello.xml",mxUtils.getXml(node));
+}
 
 function download(filename, text) {
   var element = document.createElement('a');
@@ -30,12 +44,12 @@ function download(filename, text) {
   document.body.removeChild(element);
 }
 
-document.body.appendChild(mxUtils.button('Download', function() {
+function viewXML(){
   var encoder = new mxCodec();
   var node = encoder.encode(graph.getModel());
-  download("hello.xml",mxUtils.getXml(node));
-
-}));
+  mxUtils.popup(mxUtils.getPrettyXml(node),true);
+  // mxUtils.printScreen(graph);
+}
 
 // "url(C:\\Users\\keval\\Desktop\\IDP-ET\\js\\examples\\editors\\images\\grid.gif)"
 
@@ -272,25 +286,7 @@ function addFSBVertex(container, token) {
 //   // var doc = mxUtils.createXmlDocument();
 // }
 
-document.body.appendChild(mxUtils.button('View XML', function() {
-  var encoder = new mxCodec();
-  var node = encoder.encode(graph.getModel());
-  mxUtils.popup(mxUtils.getPrettyXml(node),true);
 
-  // mxUtils.printScreen(graph);
-}));
-
-
-//Import Script
-document.body.appendChild(mxUtils.button('Import', function() {
-
-  var xml = '<mxGraphModel><root><mxCell id="0"/><mxCell id="1" parent="0"/><mxCell id="2" value="F" style="fillColor=#45afe3;shape=ellipse;" vertex="1" parent="1"><mxGeometry x="60" y="60" width="80" height="80" as="geometry"/></mxCell><mxCell id="3" value="S" style="fillColor=#ffa500;shape=hexagon;" vertex="1" parent="1"><mxGeometry x="220" y="200" width="80" height="70" as="geometry"/></mxCell><mxCell id="4" value="consist of" style="curved=1;endArrow=classic;html=1;" edge="1" parent="1" source="2" target="3"><mxGeometry y="7" width="50" height="50" relative="1" as="geometry"><mxPoint x="150" y="100" as="sourcePoint"/><mxPoint x="250" y="100" as="targetPoint"/></mxGeometry></mxCell></root></mxGraphModel>';
-
-var doc = mxUtils.parseXml(xml);
-var codec = new mxCodec(doc);
-codec.decode(doc.documentElement, graph.getModel());
-orderize();
-}));
 
 function main(container) {
   // if(!mxClient.IS_TOUCH)
