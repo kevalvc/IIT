@@ -16,6 +16,46 @@ function redoChange() {
   undoManager.redo();
 }
 
+$('.save-to').on('click', function() {
+  if ($(this).hasClass('selected')) {
+    deselect($(this));
+  } else {
+    $(this).addClass('selected');
+    $('.pop').slideFadeToggle();
+  }
+  return false;
+});
+
+$('.closebtn').on('click', function() {
+  deselect($('.save-to'));
+  return false;
+});
+
+function deselect(e) {
+  $('.pop').slideFadeToggle(function() {
+    e.removeClass('selected');
+  });
+}
+
+$.fn.slideFadeToggle = function(easing, callback) {
+  return this.animate({
+    opacity: 'toggle',
+    height: 'toggle'
+  }, 'fast', easing, callback);
+};
+
+function storegraph() {
+  var uname = $("#uname").val();
+  var fname = $("#fname").val();
+  var conn = new ActiveXObject("ADODB.Connection");
+  var recordSet = new ActiveXObject("ADODB.Recordset");
+  var connStr = "Provider=SQLOLEDB;Server=abcd;Database=mydatabase;User Id=root;Password=";
+  conn.open(connStr);
+  recordSet.Open("INSERT INTO iit VALUES ('" + uname + "','" + fname + "','" + xml + "')'", conn);
+  recordSet.close;
+  conn.close;
+}
+
 // For importing txt file
 function loadFileAsText(event, onLoadFileHandler) {
   var file = document.getElementById('my_file').files[0];
