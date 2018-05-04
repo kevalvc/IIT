@@ -5,8 +5,8 @@ var x = 60,
 var graph;
 var parent;
 var undoManager;
+var xml;
 var cells = [];
-
 
 function undoChange() {
   undoManager.undo();
@@ -16,8 +16,37 @@ function redoChange() {
   undoManager.redo();
 }
 
+// For importing txt file
+function loadFileAsText(event, onLoadFileHandler) {
+  var file = document.getElementById('my_file').files[0];
+  if (typeof window.FileReader !== 'function')
+    throw ("The file API isn't supported on this browser.");
+  let input = event.target;
+  if (!input)
+    throw ("The browser does not properly implement the event object");
+  if (!input.files)
+    throw ("This browser does not support the `files` property of the file input.");
+  if (!input.files[0])
+    return undefined;
+  // let file = input.files[0];
+  file = input.files[0];
+  let fr = new FileReader();
+  fr.onload = onLoadFileHandler;
+  fr.readAsText(file);
+
+  // $('#get_file').click(function() {});
+}
+
+function onFileLoad(elementId, event) {
+    // console.log("YOLO: ");
+    // console.log(event.target.result);
+    xml = event.target.result;
+    importXML();
+
+}
+
 function importXML() {
-  var xml = '<mxGraphModel><root><mxCell id="0"/><mxCell id="1" parent="0"/><mxCell id="2" value="F" style="fillColor=#45afe3;shape=ellipse;" vertex="1" parent="1"><mxGeometry x="60" y="60" width="80" height="80" as="geometry"/></mxCell><mxCell id="3" value="S" style="fillColor=#ffa500;shape=hexagon;" vertex="1" parent="1"><mxGeometry x="220" y="200" width="80" height="70" as="geometry"/></mxCell><mxCell id="4" value="consist of" style="curved=1;endArrow=classic;html=1;" edge="1" parent="1" source="2" target="3"><mxGeometry y="7" width="50" height="50" relative="1" as="geometry"><mxPoint x="150" y="100" as="sourcePoint"/><mxPoint x="250" y="100" as="targetPoint"/></mxGeometry></mxCell></root></mxGraphModel>';
+  // xml = '<mxGraphModel><root><mxCell id="0"/><mxCell id="1" parent="0"/><mxCell id="2" value="F" style="fillColor=#45afe3;shape=ellipse;" vertex="1" parent="1"><mxGeometry x="60" y="60" width="80" height="80" as="geometry"/></mxCell><mxCell id="3" value="S" style="fillColor=#ffa500;shape=hexagon;" vertex="1" parent="1"><mxGeometry x="220" y="200" width="80" height="70" as="geometry"/></mxCell><mxCell id="4" value="consist of" style="curved=1;endArrow=classic;html=1;" edge="1" parent="1" source="2" target="3"><mxGeometry y="7" width="50" height="50" relative="1" as="geometry"><mxPoint x="150" y="100" as="sourcePoint"/><mxPoint x="250" y="100" as="targetPoint"/></mxGeometry></mxCell></root></mxGraphModel>';
 
   var doc = mxUtils.parseXml(xml);
   var codec = new mxCodec(doc);

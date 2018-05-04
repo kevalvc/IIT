@@ -62,7 +62,10 @@
             <br>
             <span class="saver ws-ele text-center" style=""><input type="submit" class="btn btn-info text-center left-toolbar" name="" onclick="downloadXML()" value="Download XML"></span>
             <br>
-            <span class="saver ws-ele text-center" style=""><input type="submit" class="btn btn-info text-center left-toolbar" name="" onclick="importXML()" value="Import XML"></span>
+            <span class="saver ws-ele text-center" style=""><input type="submit" class="btn btn-info text-center left-toolbar" id="get_file" name="" onclick="importXML()" value="Import XML"></span>
+            <input type="file" id="my_file" onchange='loadFileAsText(event, onFileLoad.bind(this, "contents"))'>
+            <div id="customfileupload" class="text-center fileselect">Select a file</div>
+
           </div>
           <div class="col-md-8 main-row">
             <div class="main-ws" id="mainer">
@@ -113,6 +116,13 @@
 </script>
 
 <script>
+  document.getElementById('get_file').onclick = function() {
+    document.getElementById('my_file').click();
+  };
+
+  $('input[type=file]').change(function(e) {
+    $('#customfileupload').html($(this).val());
+  });
   // $(".element1").draggable({
   //   containment: ".main-ws"
   // });
