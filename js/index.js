@@ -1,6 +1,7 @@
 $("g").draggable({
   containment: ".main-ws"
 });
+
 $("rect").draggable({
   containment: ".main-ws"
 });
@@ -49,9 +50,4 @@ function genrect() {
     containment: mainws
     // containment: ".main-ws"
   });
-}
-
-function changeText(s) {
-  var ftext = s;
-  // ftext.innerHTML =
 }

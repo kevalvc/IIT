@@ -38,10 +38,10 @@ function loadFileAsText(event, onLoadFileHandler) {
 }
 
 function onFileLoad(elementId, event) {
-    // console.log("YOLO: ");
-    // console.log(event.target.result);
-    xml = event.target.result;
-    importXML();
+  // console.log("YOLO: ");
+  // console.log(event.target.result);
+  xml = event.target.result;
+  importXML();
 
 }
 
@@ -57,7 +57,12 @@ function importXML() {
 function downloadXML() {
   var encoder = new mxCodec();
   var node = encoder.encode(graph.getModel());
-  download("hello.xml", mxUtils.getXml(node));
+  var dloadname = $('#dwnld-name').val();
+  if (dloadname == "") {
+    dloadname = "hello";
+  }
+  // console.log(dloadname);
+  download(dloadname + ".xml", mxUtils.getXml(node));
 }
 
 function download(filename, text) {
@@ -573,9 +578,12 @@ function main(container) {
   // if scalePreview (last) argument is true. Dx and dy are null to force
   // the use of the defaults. Note that dx and dy are only used for the
   // drag icon but not for the preview.
-  var ds = mxUtils.makeDraggable(img, graphF, funct, dragElt, null, null, graph.autoscroll, true);
-  var ds2 = mxUtils.makeDraggable(img2, graphF, funct2, dragElt, null, null, graph.autoscroll, true);
-  var ds3 = mxUtils.makeDraggable(img3, graphF, funct3, dragElt, null, null, graph.autoscroll, true);
+  // var ds = mxUtils.makeDraggable(img, graphF, funct, dragElt, null, null, graph.autoscroll, true);
+  // var ds2 = mxUtils.makeDraggable(img2, graphF, funct2, dragElt, null, null, graph.autoscroll, true);
+  // var ds3 = mxUtils.makeDraggable(img3, graphF, funct3, dragElt, null, null, graph.autoscroll, true);
+  var ds = mxUtils.makeDraggable(img, graphF, funct, dragElt);
+  var ds2 = mxUtils.makeDraggable(img2, graphF, funct2, dragElt);
+  var ds3 = mxUtils.makeDraggable(img3, graphF, funct3, dragElt);
 
   // Restores original drag icon while outside of graph
   ds.createDragElement = mxDragSource.prototype.createDragElement;
