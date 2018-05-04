@@ -23,7 +23,7 @@
     <div class="row">
       <div class="col-md-3 agent-col">
         <div class="agent-img text-center">
-          <img src="support.png" alt="" height="150" width="150" style="border: 8px solid grey;">
+          <img src="css/support.png" alt="" height="150" width="150" style="border: 8px solid grey;">
         </div>
         <div>
           <br>
@@ -52,17 +52,17 @@
           <div class="col-md-2 tp-full text-center">
             <h4 class="tool-pal">Tool Palette</h4>
             <br>
-            <span class="saver ws-ele text-center" style=""><input id="heirarchical" type="submit" class="btn btn-info text-center autolay" name="" onclick="" value="Auto Layout"></span>
+            <span class="saver ws-ele text-center" style=""><input id="heirarchical" type="submit" class="btn btn-info text-center left-toolbar" name="" onclick="" value="Auto Layout"></span>
             <br>
-            <span class="saver ws-ele text-center" style=""><input type="submit" class="btn btn-info text-center" name="" onclick="undoChange()" value="Undo"></span>
+            <span class="saver ws-ele text-center" style=""><input type="submit" class="btn btn-info text-center left-toolbar" name="" onclick="undoChange()" value="Undo"></span>
             <br>
-            <span class="saver ws-ele text-center" style=""><input type="submit" class="btn btn-info text-center" name="" onclick="redoChange()" value="Redo"></span>
+            <span class="saver ws-ele text-center" style=""><input type="submit" class="btn btn-info text-center left-toolbar" name="" onclick="redoChange()" value="Redo"></span>
             <br>
-            <span class="saver ws-ele text-center" style=""><input type="submit" class="btn btn-info text-center" name="" onclick="viewXML()" value="View XML"></span>
+            <span class="saver ws-ele text-center" style=""><input type="submit" class="btn btn-info text-center left-toolbar" name="" onclick="viewXML()" value="View XML"></span>
             <br>
-            <span class="saver ws-ele text-center" style=""><input type="submit" class="btn btn-info text-center" name="" onclick="downloadXML()" value="Download XML"></span>
+            <span class="saver ws-ele text-center" style=""><input type="submit" class="btn btn-info text-center left-toolbar" name="" onclick="downloadXML()" value="Download XML"></span>
             <br>
-            <span class="saver ws-ele text-center" style=""><input type="submit" class="btn btn-info text-center" name="" onclick="importXML()" value="Import XML"></span>
+            <span class="saver ws-ele text-center" style=""><input type="submit" class="btn btn-info text-center left-toolbar" name="" onclick="importXML()" value="Import XML"></span>
           </div>
           <div class="col-md-8 main-row">
             <div class="main-ws" id="mainer">
@@ -74,15 +74,15 @@
             <h4 class="nodes-ws">Nodes</h4>
             <br>
             <!-- <div class="circle-xs node-eles" onclick="gencircle()"><span class="f-text">F</span></div> -->
-            <img src="css\F.png" style="width:42px;height:42px;" onclick="addFSBVertex(mainer,1)">
+            <img class="FVer" src="css\F.png" style="width:42px;height:42px;" onclick="addFSBVertex(mainer,1)">
             <br>
             <br>
             <!-- <div class="hexagon-xs hexagon-warning node-eles" onclick="genhex()">S</div> -->
-            <img src="css\S.png" style="width:42px;height:42px;" onclick="addFSBVertex(mainer,2)">
+            <img class="SVer" src="css\S.png" style="width:42px;height:42px;" onclick="addFSBVertex(mainer,2)">
             <br>
             <br>
             <!-- <div class="rect-xs node-eles" onclick="genrect()">B</div> -->
-            <img src="css\B.png" style="width:48px;height:34px;" onclick="addFSBVertex(mainer,3)">
+            <img class="BVer" src="css\B.png" style="width:48px;height:34px;" onclick="addFSBVertex(mainer,3)">
             <br>
             <br>
             <h4 class="nodes-ws">Connectors</h4>
@@ -103,12 +103,12 @@
 
 </body>
 
+<script type="text/javascript" src="js/mxClient.js"></script>
 <script type="text/javascript" src="js/tether.min.js" charset="utf-8"></script>
 <script type="text/javascript" src="js/index.js" charset="utf-8"></script>
 <script type="text/javascript" src="js/bootstrap.min.js" charset="utf-8"></script>
-<script type="text/javascript" src="js/mxClient.js"></script>
 <script type="text/javascript" src="js/graphFunctions.js"></script>
-<script type="text/javascript" src="js/import.js"></script>
+<script type="text/javascript" src="js/Actions.js"></script>
 
 </script>
 

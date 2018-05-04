@@ -8,27 +8,27 @@ var undoManager;
 var cells = [];
 
 
-function undoChange(){
-    undoManager.undo();
+function undoChange() {
+  undoManager.undo();
 }
 
-function redoChange(){
+function redoChange() {
   undoManager.redo();
 }
 
-function importXML(){
+function importXML() {
   var xml = '<mxGraphModel><root><mxCell id="0"/><mxCell id="1" parent="0"/><mxCell id="2" value="F" style="fillColor=#45afe3;shape=ellipse;" vertex="1" parent="1"><mxGeometry x="60" y="60" width="80" height="80" as="geometry"/></mxCell><mxCell id="3" value="S" style="fillColor=#ffa500;shape=hexagon;" vertex="1" parent="1"><mxGeometry x="220" y="200" width="80" height="70" as="geometry"/></mxCell><mxCell id="4" value="consist of" style="curved=1;endArrow=classic;html=1;" edge="1" parent="1" source="2" target="3"><mxGeometry y="7" width="50" height="50" relative="1" as="geometry"><mxPoint x="150" y="100" as="sourcePoint"/><mxPoint x="250" y="100" as="targetPoint"/></mxGeometry></mxCell></root></mxGraphModel>';
 
-var doc = mxUtils.parseXml(xml);
-var codec = new mxCodec(doc);
-codec.decode(doc.documentElement, graph.getModel());
-orderize();
+  var doc = mxUtils.parseXml(xml);
+  var codec = new mxCodec(doc);
+  codec.decode(doc.documentElement, graph.getModel());
+  orderize();
 }
 
-function downloadXML(){
+function downloadXML() {
   var encoder = new mxCodec();
   var node = encoder.encode(graph.getModel());
-  download("hello.xml",mxUtils.getXml(node));
+  download("hello.xml", mxUtils.getXml(node));
 }
 
 function download(filename, text) {
@@ -44,10 +44,10 @@ function download(filename, text) {
   document.body.removeChild(element);
 }
 
-function viewXML(){
+function viewXML() {
   var encoder = new mxCodec();
   var node = encoder.encode(graph.getModel());
-  mxUtils.popup(mxUtils.getPrettyXml(node),true);
+  mxUtils.popup(mxUtils.getPrettyXml(node), true);
   // mxUtils.printScreen(graph);
 }
 
@@ -93,7 +93,7 @@ function viewXML(){
 
 
 function deleteCells() {
-//graph.getModel().beginUpdate();
+  //graph.getModel().beginUpdate();
   graph.removeCells(graph.getSelectionCells());
   //graph.getModel().endUpdate();
 }
@@ -307,18 +307,18 @@ function main(container) {
   // ********************************************************************************************************************************************************
   // ********************************************************************************************************************************************************
 
+  var graphs = [];
   graph = new mxGraph(container);
   parent = graph.getDefaultParent();
   graph.centerZoom = false;
   graph.setConnectable(true);
   graph.setPanning(true);
   undoManager = new mxUndoManager();
-  var listener = function(sender, evt)
-    {
-      undoManager.undoableEditHappened(evt.getProperty('edit'));
-    };
-graph.getModel().addListener(mxEvent.UNDO, listener);
-graph.getView().addListener(mxEvent.UNDO, listener);
+  var listener = function(sender, evt) {
+    undoManager.undoableEditHappened(evt.getProperty('edit'));
+  };
+  graph.getModel().addListener(mxEvent.UNDO, listener);
+  graph.getView().addListener(mxEvent.UNDO, listener);
 
   new mxRubberband(graph);
 
@@ -479,7 +479,80 @@ graph.getView().addListener(mxEvent.UNDO, listener);
     } finally {
       graph.getModel().endUpdate();
     }
+    graphs.push(graph);
   }
+
+  // Returns the graph under the mouse
+  var graphF = function(evt) {
+    var x = mxEvent.getClientX(evt);
+    var y = mxEvent.getClientY(evt);
+    var elt = document.elementFromPoint(x, y);
+
+    for (var i = 0; i < graphs.length; i++) {
+      if (mxUtils.isAncestorNode(graphs[i].container, elt)) {
+        return graphs[i];
+      }
+    }
+
+    return null;
+  };
+
+  // Inserts a cell at the given location
+  var funct = function(graph, evt, target, x, y) {
+    var cell = new mxCell('F', new mxGeometry(x, y, 80, 80), 'fillColor=#45afe3;shape=ellipse;');
+    cell.vertex = true;
+    var cells = graph.importCells([cell], x, y, target);
+
+    if (cells != null && cells.length > 0) {
+      graph.scrollCellToVisible(cells[0]);
+      graph.setSelectionCells(cells);
+    }
+  };
+  var funct2 = function(graph, evt, target, x, y) {
+    var cell = new mxCell('S', new mxGeometry(x, y, 80, 70), 'fillColor=#ffa500;shape=hexagon;');
+    cell.vertex = true;
+    var cells = graph.importCells([cell], x, y, target);
+
+    if (cells != null && cells.length > 0) {
+      graph.scrollCellToVisible(cells[0]);
+      graph.setSelectionCells(cells);
+    }
+  };
+  var funct3 = function(graph, evt, target, x, y) {
+    var cell = new mxCell('B', new mxGeometry(x, y, 80, 40), 'fillColor=#fe5;shape=rectangle;');
+    cell.vertex = true;
+    var cells = graph.importCells([cell], x, y, target);
+
+    if (cells != null && cells.length > 0) {
+      graph.scrollCellToVisible(cells[0]);
+      graph.setSelectionCells(cells);
+    }
+  };
+
+  var img = $('.FVer')[0];
+  var img2 = $('.SVer')[0];
+  var img3 = $('.BVer')[0];
+  // document.body.appendChild(img);
+
+  // Creates the element that is being for the actual preview.
+  var dragElt = document.createElement('div');
+  dragElt.style.border = 'dashed black 1px';
+  dragElt.style.width = '80px';
+  dragElt.style.height = '80px';
+
+  // Drag source is configured to use dragElt for preview and as drag icon
+  // if scalePreview (last) argument is true. Dx and dy are null to force
+  // the use of the defaults. Note that dx and dy are only used for the
+  // drag icon but not for the preview.
+  var ds = mxUtils.makeDraggable(img, graphF, funct, dragElt, null, null, graph.autoscroll, true);
+  var ds2 = mxUtils.makeDraggable(img2, graphF, funct2, dragElt, null, null, graph.autoscroll, true);
+  var ds3 = mxUtils.makeDraggable(img3, graphF, funct3, dragElt, null, null, graph.autoscroll, true);
+
+  // Restores original drag icon while outside of graph
+  ds.createDragElement = mxDragSource.prototype.createDragElement;
+  ds2.createDragElement = mxDragSource.prototype.createDragElement;
+  ds3.createDragElement = mxDragSource.prototype.createDragElement;
+
 };
 
 function FShape() {
