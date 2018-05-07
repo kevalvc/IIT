@@ -44,17 +44,7 @@ $.fn.slideFadeToggle = function(easing, callback) {
   }, 'fast', easing, callback);
 };
 
-function storegraph() {
-  var uname = $("#uname").val();
-  var fname = $("#fname").val();
-  var conn = new ActiveXObject("ADODB.Connection");
-  var recordSet = new ActiveXObject("ADODB.Recordset");
-  var connStr = "Provider=SQLOLEDB;Server=abcd;Database=mydatabase;User Id=root;Password=";
-  conn.open(connStr);
-  recordSet.Open("INSERT INTO iit VALUES ('" + uname + "','" + fname + "','" + xml + "')'", conn);
-  recordSet.close;
-  conn.close;
-}
+function storegraph() {}
 
 // For importing txt file
 function loadFileAsText(event, onLoadFileHandler) {
@@ -73,7 +63,6 @@ function loadFileAsText(event, onLoadFileHandler) {
   let fr = new FileReader();
   fr.onload = onLoadFileHandler;
   fr.readAsText(file);
-
   // $('#get_file').click(function() {});
 }
 
@@ -82,7 +71,6 @@ function onFileLoad(elementId, event) {
   // console.log(event.target.result);
   xml = event.target.result;
   importXML();
-
 }
 
 function importXML() {
@@ -121,6 +109,9 @@ function download(filename, text) {
 function viewXML() {
   var encoder = new mxCodec();
   var node = encoder.encode(graph.getModel());
+  var xml = encodeURIComponent(mxUtils.getXml(node));
+  $(".hidden-xml-ip")[0].value = (mxUtils.getXml(node));
+  console.log("aadw")
   mxUtils.popup(mxUtils.getPrettyXml(node), true);
   // mxUtils.printScreen(graph);
 }
@@ -357,7 +348,7 @@ function addFSBVertex(container, token) {
 //   // console.log('xml');
 // //console.log(xml);
 //   mxUtils.popup(mxUtils.getPrettyXml(xml), true);
-//   // var doc = mxUtils.createXmlDocument();
+// var doc = mxUtils.createXmlDocument();
 // }
 
 

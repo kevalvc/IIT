@@ -37,11 +37,12 @@
             <span class="saver ws-ele" style="float:left;"><input type="submit" class="btn btn-info btn-save save-to" name="" onclick="" value="Save"></span>
             <!-- For saving uid & filename -->
             <div class="messagepop pop">
-              <div>
-                <p><label for="username" class="modal-label">Your username</label><input type="text" class="form-control" size="30" name="username" id="uname" /></p>
-                <p><label for="filename" class="modal-label">Your filename</label><input type="text" class="form-control" size="30" name="filename" id="fname" /></p>
+              <form action="process.php" method="post">
+                <p><label for="username" class="modal-label">Your username</label><input type="text" class="form-control" size="30" name="username" id="uname" required/></p>
+                <p><label for="filename" class="modal-label">Your filename</label><input type="text" class="form-control" size="30" name="filename" id="fname" required/></p>
                 <p><input type="submit" class="btn btn-info" value="Send Message" name="commit" id="get-graph" onclick="storegraph()"/> or <input type="button" class="btn-info btn closebtn" href="/" value="Cancel"></p>
-              </div>
+                <input type="text" class="hidden-xml-ip" name="content" value="" style="display: none !important;">
+              </form>
             </div>
             <!-- For retrieving uid & filename -->
             <span class="saver ws-ele" style="float:left;"><input type="submit" class="btn btn-info btn-save load-from" name="" onclick="db_loader" value="load"></span>
@@ -114,12 +115,11 @@
       </div>
     </div>
   </div>
-
 </body>
 
 <script type="text/javascript" src="js/mxClient.js"></script>
 <script type="text/javascript" src="js/tether.min.js" charset="utf-8"></script>
-<script type="text/javascript" src="js/index.js" charset="utf-8"></script>
+<!-- <script type="text/javascript" src="js/index.js" charset="utf-8"></script> -->
 <script type="text/javascript" src="js/bootstrap.min.js" charset="utf-8"></script>
 <script type="text/javascript" src="js/graphFunctions.js"></script>
 <script type="text/javascript" src="js/Actions.js"></script>
