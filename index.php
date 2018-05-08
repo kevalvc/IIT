@@ -51,7 +51,7 @@
                 <p><label for="username" class="modal-label">Your username</label><input type="text" class="form-control" size="30" name="username" id="uname" required/></p>
                 <p><label for="filename" class="modal-label">Your filename</label><input type="text" class="form-control" size="30" name="filename" id="fname" required/></p>
                 <p><input type="submit" class="btn btn-info" value="Retrieve Message" name="commit" id="get-graph" onclick=""/> or <input type="button" class="btn-info btn closebtn2" href="/" value="Cancel"></p>
-                <input type="text" class="hidden-xml-ip" name="content" value="" style="display: none !important;">
+                <input type="text" class="hidden-xml-ip" name="content" value="<?php echo $row; ?>" style="display: none !important;">
               </form>
             </div>
 

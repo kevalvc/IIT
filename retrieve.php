@@ -1,28 +1,24 @@
 <?php
 
+header('Content-type: text/html; charset=UTF-8');
+
 $connect = mysqli_connect('localhost:3307','root','', "mydatabase");
-// Check connection
 if ($connect === false) {
     die("ERROR: Could not connect. " . mysqli_connect_error());
 }
 
+mysqli_set_charset($connect, "UTF8");
 
-//create a variable
 $uname = $_GET['username'];
 $filename = $_GET['filename'];
-// $uname = 'abcde';
-// $filename = 'abc';
 // $content = "<script></script>";
 
-$sql = "SELECT * FROM iit where uname = '$uname'";
+$sql = "SELECT * FROM iit where uname = '$uname' and filename = '$filename'";
 $result = mysqli_query($connect, $sql) or die ("Query failed");
-while($row = mysqli_fetch_object($result)){
-    print_r ($row);
+while($row = mysqli_fetch_array($result)){
+  echo ($row[contents]);
+      // print_r ($row);
 }
-// $row=mysqli_fetch_field($result);
-//   echo '<pre>';
-//   print_r ($row);
-//   echo '</pre>';
 
 // if(mysqli_affected_rows($connect) > 0){
 	// echo "<p>imported</p>";
