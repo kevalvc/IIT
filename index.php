@@ -40,12 +40,21 @@
               <form action="process.php" method="post">
                 <p><label for="username" class="modal-label">Your username</label><input type="text" class="form-control" size="30" name="username" id="uname" required/></p>
                 <p><label for="filename" class="modal-label">Your filename</label><input type="text" class="form-control" size="30" name="filename" id="fname" required/></p>
-                <p><input type="submit" class="btn btn-info" value="Send Message" name="commit" id="get-graph" onclick="storegraph()"/> or <input type="button" class="btn-info btn closebtn" href="/" value="Cancel"></p>
+                <p><input type="submit" class="btn btn-info" value="Send Message" name="commit" id="get-graph" onclick=""/> or <input type="button" class="btn-info btn closebtn" href="/" value="Cancel"></p>
                 <input type="text" class="hidden-xml-ip" name="content" value="" style="display: none !important;">
               </form>
             </div>
+            <span class="saver ws-ele" style="float:left;"><input type="submit" class="btn btn-info btn-save load-from" name="" onclick="" value="load"></span>
             <!-- For retrieving uid & filename -->
-            <span class="saver ws-ele" style="float:left;"><input type="submit" class="btn btn-info btn-save load-from" name="" onclick="db_loader" value="load"></span>
+            <div class="messagepop2 pop2">
+              <form action="retrieve.php" method="get">
+                <p><label for="username" class="modal-label">Your username</label><input type="text" class="form-control" size="30" name="username" id="uname" required/></p>
+                <p><label for="filename" class="modal-label">Your filename</label><input type="text" class="form-control" size="30" name="filename" id="fname" required/></p>
+                <p><input type="submit" class="btn btn-info" value="Retrieve Message" name="commit" id="get-graph" onclick=""/> or <input type="button" class="btn-info btn closebtn2" href="/" value="Cancel"></p>
+                <input type="text" class="hidden-xml-ip" name="content" value="" style="display: none !important;">
+              </form>
+            </div>
+
             <span class="ws-ele" style="float:left;"><input type="submit" class="btn btn-info btn-in" name="" onclick="zoomIn()" value="+"></span>
             <span class="ws-ele" style="float:left;"><input type="submit" class="btn btn-info btn-out" name="" onclick="zoomOut()"  value="-"></span>
           </div>

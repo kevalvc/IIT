@@ -37,14 +37,34 @@ function deselect(e) {
   });
 }
 
+$('.load-from').on('click', function() {
+  if ($(this).hasClass('selected')) {
+    deselect2($(this));
+  } else {
+    $(this).addClass('selected');
+    $('.pop2').slideFadeToggle();
+  }
+  return false;
+});
+
+$('.closebtn2').on('click', function() {
+  deselect2($('.load-from'));
+  return false;
+});
+
+function deselect2(e) {
+  $('.pop2').slideFadeToggle(function() {
+    e.removeClass('selected');
+  });
+}
+
+
 $.fn.slideFadeToggle = function(easing, callback) {
   return this.animate({
     opacity: 'toggle',
     height: 'toggle'
   }, 'fast', easing, callback);
 };
-
-function storegraph() {}
 
 // For importing txt file
 function loadFileAsText(event, onLoadFileHandler) {

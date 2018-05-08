@@ -211,6 +211,13 @@ canvas {
   z-index:100;
 }
 
+modal-label {
+  display: block;
+  margin-bottom: 3px;
+  padding-left: 15px;
+  text-indent: -15px;
+}
+
 .messagepop {
   background-color: #FFFFFF;
   border: 1px solid #999999;
@@ -224,14 +231,26 @@ canvas {
   padding: 25px 25px 20px;
 }
 
-modal-label {
-  display: block;
-  margin-bottom: 3px;
-  padding-left: 15px;
-  text-indent: -15px;
+.messagepop p, .messagepop.div {
+  border-bottom: 1px solid #EFEFEF;
+  margin: 8px 0;
+  padding-bottom: 8px;
 }
 
-.messagepop p, .messagepop.div {
+.messagepop2 {
+  background-color: #FFFFFF;
+  border: 1px solid #999999;
+  cursor: default;
+  display: none;
+  margin-top: 15px;
+  position: absolute;
+  text-align: left;
+  width: 394px;
+  z-index: 50;
+  padding: 25px 25px 20px;
+}
+
+.messagepop2 p, .messagepop2.div {
   border-bottom: 1px solid #EFEFEF;
   margin: 8px 0;
   padding-bottom: 8px;
