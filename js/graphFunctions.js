@@ -7,9 +7,38 @@ var parent;
 var undoManager;
 var xml;
 var cells = [];
+var index = 0;
+
+$(window).bind("load", function() {
+  var code_text;
+  var url = 'tempXmlFile.txt';
+   var request = new XMLHttpRequest();
+request.open('GET',url);
+request.responseType = 'text';
+
+request.onload = function() {
+  code_text = request.response;
+  //console.log(code_text);
+  xml = code_text;
+  // console.log(xml);
+  console.log("loaded");
+
+  importXML();
+
+};
+
+request.send();
+importXML();
+});
+// window.onload = loadFromDb();
+function loadFromDb(){
+
+}
+
 
 function undoChange() {
-  undoManager.undo();
+  // undoManager.undo();
+  loadFromDb();
 }
 
 function redoChange() {
@@ -131,9 +160,10 @@ function viewXML() {
   var node = encoder.encode(graph.getModel());
   var xml = encodeURIComponent(mxUtils.getXml(node));
   $(".hidden-xml-ip")[0].value = (mxUtils.getXml(node));
-  console.log("aadw")
+  // console.log("aadw")
   mxUtils.popup(mxUtils.getPrettyXml(node), true);
   // mxUtils.printScreen(graph);
+
 }
 
 // "url(C:\\Users\\keval\\Desktop\\IDP-ET\\js\\examples\\editors\\images\\grid.gif)"
@@ -643,34 +673,34 @@ function main(container) {
 
 };
 
-function FShape() {
-  mxCylinder.call(this);
-};
-
-mxUtils.extend(FShape, mxCylinder);
-
-FShape.prototype.extrude = 10;
-
-FShape.prototype.redrawPath = function(path, x, y, w, h, isForeground) {
-  var dy = this.extrude * this.scale;
-  var dx = this.extrude * this.scale;
-
-  if (isForeground) {
-    path.moveTo(0, dy);
-    path.lineTo(w - dx, dy);
-    path.lineTo(w, 0);
-    path.moveTo(w - dx, dy);
-    path.lineTo(w - dx, h);
-  } else {
-    path.moveTo(0, dy);
-    path.lineTo(dx, 0);
-    path.lineTo(w, 0);
-    path.lineTo(w, h - dy);
-    path.lineTo(w - dx, h);
-    path.lineTo(0, h);
-    path.lineTo(0, dy);
-    path.lineTo(dx, 0);
-    path.close();
-  }
-};
-mxCellRenderer.registerShape('box', FShape);
+// function FShape() {
+//   mxCylinder.call(this);
+// };
+//
+// mxUtils.extend(FShape, mxCylinder);
+//
+// FShape.prototype.extrude = 10;
+//
+// FShape.prototype.redrawPath = function(path, x, y, w, h, isForeground) {
+//   var dy = this.extrude * this.scale;
+//   var dx = this.extrude * this.scale;
+//
+//   if (isForeground) {
+//     path.moveTo(0, dy);
+//     path.lineTo(w - dx, dy);
+//     path.lineTo(w, 0);
+//     path.moveTo(w - dx, dy);
+//     path.lineTo(w - dx, h);
+//   } else {
+//     path.moveTo(0, dy);
+//     path.lineTo(dx, 0);
+//     path.lineTo(w, 0);
+//     path.lineTo(w, h - dy);
+//     path.lineTo(w - dx, h);
+//     path.lineTo(0, h);
+//     path.lineTo(0, dy);
+//     path.lineTo(dx, 0);
+//     path.close();
+//   }
+// };
+// mxCellRenderer.registerShape('box', FShape);

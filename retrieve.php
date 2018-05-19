@@ -1,8 +1,8 @@
 <?php
 
-header('Content-type: text/html; charset=UTF-8');
+header('Content-type: text/html; charset=UTF-8;');
 
-$connect = mysqli_connect('localhost:3307','root','', "mydatabase");
+$connect = mysqli_connect('localhost','root','', "mydatabase");
 if ($connect === false) {
     die("ERROR: Could not connect. " . mysqli_connect_error());
 }
@@ -16,9 +16,17 @@ $filename = $_GET['filename'];
 $sql = "SELECT * FROM iit where uname = '$uname' and filename = '$filename'";
 $result = mysqli_query($connect, $sql) or die ("Query failed");
 while($row = mysqli_fetch_array($result)){
-  echo ($row[contents]);
+  //echo ($row[contents]);
       // print_r ($row);
+$fp = fopen("tempXmlFile.txt","wb");
+fwrite($fp,htmlspecialchars_decode($row[contents]));
+
 }
+fclose($fp);
+
+header('Location: index.php');
+
+
 
 // if(mysqli_affected_rows($connect) > 0){
 	// echo "<p>imported</p>";

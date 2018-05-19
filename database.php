@@ -1,6 +1,6 @@
 <?php
 
-$connect=mysqli_connect('localhost:3307','root','','mydatabase');
+$connect=mysqli_connect('localhost','root','','mydatabase');
 
 if(mysqli_connect_errno($connect))
 {
