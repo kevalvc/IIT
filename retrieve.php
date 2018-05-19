@@ -1,5 +1,7 @@
 <?php
 
+session_start();
+
 header('Content-type: text/html; charset=UTF-8');
 
 $connect = mysqli_connect('localhost:3307','root','', "mydatabase");
@@ -16,9 +18,12 @@ $filename = $_GET['filename'];
 $sql = "SELECT * FROM iit where uname = '$uname' and filename = '$filename'";
 $result = mysqli_query($connect, $sql) or die ("Query failed");
 while($row = mysqli_fetch_array($result)){
-  echo ($row[contents]);
+  // echo ($row['contents']);
+  $_SESSION['xmlcontents'] = $row['contents'];
       // print_r ($row);
 }
+echo "aaa";
+echo $_SESSION['xmlcontents'];
 
 // if(mysqli_affected_rows($connect) > 0){
 	// echo "<p>imported</p>";

@@ -1,3 +1,14 @@
+<?php
+// echo "ddd ".$_session['xmlcontents'];
+  session_start();
+  echo "aaa";
+  if (isset($_SESSION['xmlcontents'])) {
+    echo $_SESSION['xmlcontents'];
+    echo "ppp";
+  }
+  echo "bbb";
+?>
+
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 
