@@ -1,8 +1,8 @@
 <?php include 'database.php';
 
 //create a variable
-$uname = ($connect, $_POST['username']);
-$filename = ($connect, $_POST['filename']);
+$uname = (htmlspecialchars($_POST['username']));
+$filename = (htmlspecialchars($_POST['filename']));
 $contents = (htmlspecialchars($_POST['content']));
 // $content = "<script></script>";
 
