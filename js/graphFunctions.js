@@ -32,7 +32,7 @@ var index = 0;
 // });
 
 if (localStorage.getItem("localXMLVal") == "") {
-  alert("aa");
+  // alert("aa");
   retr();
 }
 
