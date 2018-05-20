@@ -62,6 +62,9 @@ function retrieveptr() {
 }
 
 $('.save-to').on('click', function() {
+  if ($('.load-from').hasClass('selected')) {
+    deselect2($('.load-from'));
+  }
   if ($(this).hasClass('selected')) {
     deselect($(this));
   } else {
@@ -83,6 +86,9 @@ function deselect(e) {
 }
 
 $('.load-from').on('click', function() {
+  if ($('.save-to').hasClass('selected')) {
+    deselect($('.save-to'));
+  }
   if ($(this).hasClass('selected')) {
     deselect2($(this));
   } else {
@@ -109,6 +115,15 @@ $.fn.slideFadeToggle = function(easing, callback) {
     height: 'toggle'
   }, 'fast', easing, callback);
 };
+
+function removeDefaultPops() {
+  if ($('.save-to').hasClass('selected')) {
+    deselect($('.save-to'));
+  }
+  if ($('.load-from').hasClass('selected')) {
+    deselect2($('.load-from'));
+  }
+}
 
 // For importing txt file
 function loadFileAsText(event, onLoadFileHandler) {
@@ -592,8 +607,8 @@ function main(container) {
     var doc = mxUtils.createXmlDocument();
     graph.getModel().beginUpdate();
     try {
-        //removed default vertex
-        addFSBVertex(container, 1);
+      //removed default vertex
+      addFSBVertex(container, 1);
     } catch (e) {
 
     } finally {
@@ -604,7 +619,7 @@ function main(container) {
 
   // Checks if xml exists
   // console.log("localst: "+localStorage.getItem("localXMLVal"));
-  if(localStorage.getItem("localXMLVal") != "") {
+  if (localStorage.getItem("localXMLVal") != "") {
     xml = localStorage.getItem("localXMLVal");
     importXML();
   }
