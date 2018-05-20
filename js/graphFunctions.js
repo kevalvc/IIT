@@ -457,11 +457,13 @@ function main(container) {
   graph.getModel().addListener(mxEvent.UNDO, listener);
   graph.getView().addListener(mxEvent.UNDO, listener);
 
-  new mxRubberband(graph);
+  var rubberband = new mxRubberband(graph);
 
   // graph.maximumGraphBounds = new mxRectangle(0, 0, parseInt($('.main-ws').width()), parseInt($('.main-ws').height()));
   var style = graph.getStylesheet().getDefaultVertexStyle();
 
+  // Tap and hold on background starts rubberband for multiple selected
+  // cells the cell associated with the event is deselected
   graph.addListener(mxEvent.TAP_AND_HOLD, function(sender, evt) {
     if (!mxEvent.isMultiTouchEvent(evt)) {
       var me = evt.getProperty('event');
@@ -479,6 +481,7 @@ function main(container) {
       evt.consume();
     }
   });
+
   orderize();
 
   //graph.setEnabled(false);
@@ -710,8 +713,6 @@ function main(container) {
     };
 
   })();
-
-
 
   if (!mxClient.isBrowserSupported()) {
     mxUtils.error('Browser Not Supported');
