@@ -7,13 +7,58 @@ var parent;
 var undoManager;
 var xml;
 var cells = [];
+var index = 0;
+
+// $(window).bind("load", function() {
+//   var code_text;
+//   var url = 'tempXmlFile.txt';
+//    var request = new XMLHttpRequest();
+// request.open('GET',url);
+// request.responseType = 'text';
+//
+// request.onload = function() {
+//   code_text = request.response;
+//   //console.log(code_text);
+//   xml = code_text;
+//   // console.log(xml);
+//   console.log("loaded");
+//
+//   importXML();
+//
+// };
+//
+// request.send();
+// importXML();
+// });
+
+if (localStorage.getItem("localXMLVal") == "") {
+  alert("aa");
+  retr();
+}
 
 function undoChange() {
   undoManager.undo();
+  // loadFromDb();
 }
 
 function redoChange() {
   undoManager.redo();
+}
+
+// onFormSubmit : sets value of html after retrieval
+function retr() {
+  var retrievedGraph = ($(".hidden-xml-op").val());
+  if (retrievedGraph == "") {
+
+  } else {
+    xml = retrievedGraph;
+    localStorage.setItem("localXMLVal", xml);
+    importXML();
+  }
+}
+
+function retrieveptr() {
+  localStorage.setItem("localXMLVal", "");
 }
 
 $('.save-to').on('click', function() {
@@ -58,7 +103,6 @@ function deselect2(e) {
   });
 }
 
-
 $.fn.slideFadeToggle = function(easing, callback) {
   return this.animate({
     opacity: 'toggle',
@@ -87,15 +131,14 @@ function loadFileAsText(event, onLoadFileHandler) {
 }
 
 function onFileLoad(elementId, event) {
-  // console.log("YOLO: ");
   // console.log(event.target.result);
   xml = event.target.result;
+  // console.log(xml);
   importXML();
 }
 
 function importXML() {
   // xml = '<mxGraphModel><root><mxCell id="0"/><mxCell id="1" parent="0"/><mxCell id="2" value="F" style="fillColor=#45afe3;shape=ellipse;" vertex="1" parent="1"><mxGeometry x="60" y="60" width="80" height="80" as="geometry"/></mxCell><mxCell id="3" value="S" style="fillColor=#ffa500;shape=hexagon;" vertex="1" parent="1"><mxGeometry x="220" y="200" width="80" height="70" as="geometry"/></mxCell><mxCell id="4" value="consist of" style="curved=1;endArrow=classic;html=1;" edge="1" parent="1" source="2" target="3"><mxGeometry y="7" width="50" height="50" relative="1" as="geometry"><mxPoint x="150" y="100" as="sourcePoint"/><mxPoint x="250" y="100" as="targetPoint"/></mxGeometry></mxCell></root></mxGraphModel>';
-
   var doc = mxUtils.parseXml(xml);
   var codec = new mxCodec(doc);
   codec.decode(doc.documentElement, graph.getModel());
@@ -129,9 +172,10 @@ function download(filename, text) {
 function viewXML() {
   var encoder = new mxCodec();
   var node = encoder.encode(graph.getModel());
-  var xml = encodeURIComponent(mxUtils.getXml(node));
+  xml = encodeURIComponent(mxUtils.getXml(node));
+  // console.log((mxUtils.getXml(node)));
   $(".hidden-xml-ip")[0].value = (mxUtils.getXml(node));
-  console.log("aadw")
+  localStorage.setItem("localXMLVal", mxUtils.getXml(node));
   mxUtils.popup(mxUtils.getPrettyXml(node), true);
   // mxUtils.printScreen(graph);
 }
@@ -213,13 +257,6 @@ function orderize() {
   });
 }
 
-function textSelection(container) {
-  console.log("ge");
-
-
-
-  console.log("mmn");
-}
 //Adding Edge
 function addFSBEdge(container, token) {
   new mxRubberband(graph);
@@ -427,8 +464,6 @@ function main(container) {
       evt.consume();
     }
   });
-
-  textSelection(container);
   orderize();
 
   //graph.setEnabled(false);
@@ -557,14 +592,21 @@ function main(container) {
     var doc = mxUtils.createXmlDocument();
     graph.getModel().beginUpdate();
     try {
-      //removed default vertex
-      addFSBVertex(container, 1);
+        //removed default vertex
+        addFSBVertex(container, 1);
     } catch (e) {
 
     } finally {
       graph.getModel().endUpdate();
     }
     graphs.push(graph);
+  }
+
+  // Checks if xml exists
+  // console.log("localst: "+localStorage.getItem("localXMLVal"));
+  if(localStorage.getItem("localXMLVal") != "") {
+    xml = localStorage.getItem("localXMLVal");
+    importXML();
   }
 
   // Returns the graph under the mouse
@@ -643,34 +685,34 @@ function main(container) {
 
 };
 
-function FShape() {
-  mxCylinder.call(this);
-};
-
-mxUtils.extend(FShape, mxCylinder);
-
-FShape.prototype.extrude = 10;
-
-FShape.prototype.redrawPath = function(path, x, y, w, h, isForeground) {
-  var dy = this.extrude * this.scale;
-  var dx = this.extrude * this.scale;
-
-  if (isForeground) {
-    path.moveTo(0, dy);
-    path.lineTo(w - dx, dy);
-    path.lineTo(w, 0);
-    path.moveTo(w - dx, dy);
-    path.lineTo(w - dx, h);
-  } else {
-    path.moveTo(0, dy);
-    path.lineTo(dx, 0);
-    path.lineTo(w, 0);
-    path.lineTo(w, h - dy);
-    path.lineTo(w - dx, h);
-    path.lineTo(0, h);
-    path.lineTo(0, dy);
-    path.lineTo(dx, 0);
-    path.close();
-  }
-};
-mxCellRenderer.registerShape('box', FShape);
+// function FShape() {
+//   mxCylinder.call(this);
+// };
+//
+// mxUtils.extend(FShape, mxCylinder);
+//
+// FShape.prototype.extrude = 10;
+//
+// FShape.prototype.redrawPath = function(path, x, y, w, h, isForeground) {
+//   var dy = this.extrude * this.scale;
+//   var dx = this.extrude * this.scale;
+//
+//   if (isForeground) {
+//     path.moveTo(0, dy);
+//     path.lineTo(w - dx, dy);
+//     path.lineTo(w, 0);
+//     path.moveTo(w - dx, dy);
+//     path.lineTo(w - dx, h);
+//   } else {
+//     path.moveTo(0, dy);
+//     path.lineTo(dx, 0);
+//     path.lineTo(w, 0);
+//     path.lineTo(w, h - dy);
+//     path.lineTo(w - dx, h);
+//     path.lineTo(0, h);
+//     path.lineTo(0, dy);
+//     path.lineTo(dx, 0);
+//     path.close();
+//   }
+// };
+// mxCellRenderer.registerShape('box', FShape);

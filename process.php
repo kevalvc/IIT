@@ -11,11 +11,12 @@ mysqli_query($connect,"INSERT INTO iit (uname, filename, contents)
 
 if(mysqli_affected_rows($connect) > 0){
 	echo "<p>Form Added</p>";
-	echo "<a href='index.php'>Go Back</a>";
 	echo $contents;
+	header('Location: index.php');
 } else {
 	echo "Form NOT Filled<br />";
 	echo mysqli_error ($connect);
+	echo "<a href='index.php'>Go Back</a>";
 }
 
 // print_r($_POST);

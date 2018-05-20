@@ -1,7 +1,6 @@
 <?php
 
 session_start();
-
 header('Content-type: text/html; charset=UTF-8');
 
 $connect = mysqli_connect('localhost:3307','root','', "mydatabase");
@@ -21,9 +20,14 @@ while($row = mysqli_fetch_array($result)){
   // echo ($row['contents']);
   $_SESSION['xmlcontents'] = $row['contents'];
       // print_r ($row);
+// $fp = fopen("tempXmlFile.txt","wb");
+// fwrite($fp,htmlspecialchars_decode($row[contents]));
+
 }
-echo "aaa";
+// fclose($fp);
+
 echo $_SESSION['xmlcontents'];
+header('Location: index.php');
 
 // if(mysqli_affected_rows($connect) > 0){
 	// echo "<p>imported</p>";
