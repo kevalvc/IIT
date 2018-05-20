@@ -87,7 +87,7 @@ body {
 
 .my-navbar {
   background-color: #386998;
-  padding-top: 10px;
+  padding-top: 13px;
   padding-right: 15px;
   padding-bottom: 10px;
 }
@@ -98,7 +98,7 @@ body {
 
 #get_file {
   /* background: #f9f9f9; */
-  border: 1px solid #88c;
+  /* border: 1px solid #88c; */
   padding: 10px;
   border-radius: 5px;
   margin: 10px;

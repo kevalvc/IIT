@@ -601,6 +601,118 @@ function main(container) {
   })();
 
 
+  (function() {
+    // Enables rotation handle
+    mxVertexHandler.prototype.rotationEnabled = true;
+
+    // Enables managing of sizers
+    mxVertexHandler.prototype.manageSizers = true;
+
+    // Enables live preview
+    mxVertexHandler.prototype.livePreview = true;
+
+    // Sets constants for touch style
+    mxConstants.HANDLE_SIZE = 16;
+    mxConstants.LABEL_HANDLE_SIZE = 7;
+
+    // Larger tolerance and grid for real touch devices
+    if (mxClient.IS_TOUCH || navigator.maxTouchPoints > 0 || navigator.msMaxTouchPoints > 0) {
+      mxShape.prototype.svgStrokeTolerance = 18;
+      mxVertexHandler.prototype.tolerance = 12;
+      mxEdgeHandler.prototype.tolerance = 12;
+      mxGraph.prototype.tolerance = 12;
+    }
+
+    // One finger pans (no rubberband selection) must start regardless of mouse button
+    mxPanningHandler.prototype.isPanningTrigger = function(me) {
+      var evt = me.getEvent();
+
+      return (me.getState() == null && !mxEvent.isMouseEvent(evt)) ||
+        (mxEvent.isPopupTrigger(evt) && (me.getState() == null ||
+          mxEvent.isControlDown(evt) || mxEvent.isShiftDown(evt)));
+    };
+
+    // Rounded edge and vertex handles
+    var touchHandle = new mxImage('css/handle-main.png', 17, 17);
+    mxVertexHandler.prototype.handleImage = touchHandle;
+    mxEdgeHandler.prototype.handleImage = touchHandle;
+    mxOutline.prototype.sizerImage = touchHandle;
+
+    // Pre-fetches touch handle
+    new Image().src = touchHandle.src;
+    var vertexHandlerInit = mxVertexHandler.prototype.init;
+    mxVertexHandler.prototype.init = function() {
+      // TODO: Use 4 sizers, move outside of shape
+      //this.singleSizer = this.state.width < 30 && this.state.height < 30;
+      vertexHandlerInit.apply(this, arguments);
+
+      this.redrawHandles();
+    };
+
+    var vertexHandlerHideSizers = mxVertexHandler.prototype.hideSizers;
+    mxVertexHandler.prototype.hideSizers = function() {
+      vertexHandlerHideSizers.apply(this, arguments);
+
+      if (this.connectorImg != null) {
+        this.connectorImg.style.visibility = 'hidden';
+      }
+    };
+
+    var vertexHandlerReset = mxVertexHandler.prototype.reset;
+    mxVertexHandler.prototype.reset = function() {
+      vertexHandlerReset.apply(this, arguments);
+
+      if (this.connectorImg != null) {
+        this.connectorImg.style.visibility = '';
+      }
+    };
+
+    var vertexHandlerRedrawHandles = mxVertexHandler.prototype.redrawHandles;
+    mxVertexHandler.prototype.redrawHandles = function() {
+      vertexHandlerRedrawHandles.apply(this);
+
+      if (this.state != null && this.connectorImg != null) {
+        var pt = new mxPoint();
+        var s = this.state;
+
+        // Top right for single-sizer
+        if (mxVertexHandler.prototype.singleSizer) {
+          pt.x = s.x + s.width - this.connectorImg.offsetWidth / 2;
+          pt.y = s.y - this.connectorImg.offsetHeight / 2;
+        } else {
+          pt.x = s.x + s.width + mxConstants.HANDLE_SIZE / 2 + 4 + this.connectorImg.offsetWidth / 2;
+          pt.y = s.y + s.height / 2;
+        }
+
+        var alpha = mxUtils.toRadians(mxUtils.getValue(s.style, mxConstants.STYLE_ROTATION, 0));
+
+        if (alpha != 0) {
+          var cos = Math.cos(alpha);
+          var sin = Math.sin(alpha);
+
+          var ct = new mxPoint(s.getCenterX(), s.getCenterY());
+          pt = mxUtils.getRotatedPoint(pt, cos, sin, ct);
+        }
+
+        this.connectorImg.style.left = (pt.x - this.connectorImg.offsetWidth / 2) + 'px';
+        this.connectorImg.style.top = (pt.y - this.connectorImg.offsetHeight / 2) + 'px';
+      }
+    };
+
+    var vertexHandlerDestroy = mxVertexHandler.prototype.destroy;
+    mxVertexHandler.prototype.destroy = function(sender, me) {
+      vertexHandlerDestroy.apply(this, arguments);
+
+      if (this.connectorImg != null) {
+        this.connectorImg.parentNode.removeChild(this.connectorImg);
+        this.connectorImg = null;
+      }
+    };
+
+  })();
+
+
+
   if (!mxClient.isBrowserSupported()) {
     mxUtils.error('Browser Not Supported');
   } else {
