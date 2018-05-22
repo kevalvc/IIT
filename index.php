@@ -31,7 +31,7 @@
     <div class="row">
       <div class="col-md-3 agent-col">
         <div class="agent-img text-center">
-          <img src="css/agent.png" alt="" height="200" width="200" style="border-radius: 50%; margin-bottom: 25px;">
+        <img src="css/agent.png" alt="" class="agent-sizer" style="border-radius: 50%; margin-bottom: 25px;">
           <br>
           <p class="text-center agent-text">I'm going to give you a tour of the Workspace. Let's get started!</p>
           <input type="submit" class="text-center skip-intro" name="" value="Skip Intro">
@@ -78,21 +78,21 @@
             <div class="col-md-2 tp-full text-center floater">
               <h4 class="tool-pal">TOOL PALETTE</h4>
               <br>
-              <span class="saver ws-ele text-center" style=""><input id="heirarchical" type="submit" class="btn btn-info text-center left-toolbar" name="" onclick="" value="Auto Layout"></span>
-              <br>
-              <span class="saver ws-ele text-center" style=""><input type="submit" class="btn btn-info text-center left-toolbar" name="" onclick="undoChange()" value="Undo"></span>
-              <br>
-              <span class="saver ws-ele text-center" style=""><input type="submit" class="btn btn-info text-center left-toolbar" name="" onclick="redoChange()" value="Redo"></span>
-              <br>
+              <span class="saver ws-ele text-center" style=""><input id="heirarchical" type="submit" class="autolayout-btn btn btn-info text-center left-toolbar" name="" onclick="" value="Auto Layout"></span>
+              <!-- <br> -->
+              <span class="saver ws-ele text-center" style=""><input type="submit" class="btn btn-info text-center left-toolbar" name="" onclick="undoChange()" id="undo-btn" value="Undo"></span>
+              <!-- <br> -->
+              <span class="saver ws-ele text-center" style=""><input type="submit" class="btn btn-info text-center left-toolbar" name="" onclick="redoChange()" id="redo-btn" value="Redo"></span>
+              <!-- <br> -->
               <span class="saver ws-ele text-center" style=""><input type="submit" class="btn btn-info text-center left-toolbar" name="" onclick="viewXML()" value="View XML"></span>
-              <br>
+              <!-- <br> -->
               <span class="saver ws-ele text-center" style=""><input type="submit" class="btn btn-info text-center left-toolbar" name="" onclick="downloadXML()" value="Download XML"></span>
               <input type="text" id="dwnld-name" placeholder="Save as" name="" value="">
-              <br>
+              <!-- <br> -->
               <span class="saver ws-ele text-center" style=""><input type="submit" class="btn btn-info text-center left-toolbar" id="get_file" name="" onclick="importXML()" value="Import XML"></span>
               <input type="file" id="my_file" onchange='loadFileAsText(event, onFileLoad.bind(this, "contents"))'>
               <div id="customfileupload" class="text-center fileselect">Select a file</div>
-              <br>
+              <!-- <br> -->
             </div>
             <div class="col-md-8 main-row floater">
               <div class="main-ws" id="mainer">

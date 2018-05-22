@@ -195,6 +195,17 @@ function viewXML() {
   // mxUtils.printScreen(graph);
 }
 
+function XMLSAVE() {
+  var encoder = new mxCodec();
+  var node = encoder.encode(graph.getModel());
+  xml = encodeURIComponent(mxUtils.getXml(node));
+  // console.log((mxUtils.getXml(node)));
+  $(".hidden-xml-ip")[0].value = (mxUtils.getXml(node));
+  localStorage.setItem("localXMLVal", mxUtils.getXml(node));
+  // mxUtils.popup(mxUtils.getPrettyXml(node), true);
+  // mxUtils.printScreen(graph);
+}
+
 // "url(C:\\Users\\keval\\Desktop\\IDP-ET\\js\\examples\\editors\\images\\grid.gif)"
 
 // function exportFile(format)
@@ -423,7 +434,40 @@ function addFSBVertex(container, token) {
 // var doc = mxUtils.createXmlDocument();
 // }
 
-
+function AutoSave() {
+  graph.addListener(mxEvent.CELLS_MOVED, function() {
+    // console.log("aaaaa");
+    XMLSAVE();
+  });
+  graph.addListener(mxEvent.CELLS_ADDED, function() {
+    // console.log("aaaaa");
+    XMLSAVE();
+  });
+  graph.addListener(mxEvent.CELLS_RESIZED, function() {
+    // console.log("aaaaa");
+    XMLSAVE();
+  });
+  graph.addListener(mxEvent.CELLS_REMOVED, function() {
+    // console.log("aaaaa");
+    XMLSAVE();
+  });
+  graph.addListener(mxEvent.LABEL_CHANGED, function() {
+    // console.log("aaaaa");
+    XMLSAVE();
+  });
+  $('#undo-btn').click(function() {
+    // alert("Handler for .click() called.");
+    XMLSAVE();
+  });
+  $('#redo-btn').click(function() {
+    // alert("Handler for .click() called.");
+    XMLSAVE();
+  });
+  $('.autolayout-btn').click(function() {
+    // alert("Handler for .click() called.");
+    XMLSAVE();
+  });
+}
 
 function main(container) {
   // if(!mxClient.IS_TOUCH)
@@ -721,7 +765,7 @@ function main(container) {
     graph.getModel().beginUpdate();
     try {
       //removed default vertex
-      addFSBVertex(container, 1);
+      // addFSBVertex(container, 1);
     } catch (e) {
 
     } finally {
@@ -736,6 +780,8 @@ function main(container) {
     xml = localStorage.getItem("localXMLVal");
     importXML();
   }
+
+  AutoSave();
 
   // Returns the graph under the mouse
   var graphF = function(evt) {
