@@ -49,7 +49,16 @@ function redoChange() {
 function retr() {
   var retrievedGraph = ($(".hidden-xml-op").val());
   if (retrievedGraph == "") {
-
+    if (localStorage.getItem("localXMLVal") == "") {
+      xml = '<mxGraphModel><root><mxCell id="0"/><mxCell id="1" parent="0"/></root></mxGraphModel>';
+      console.log("XML"+xml);
+      toastr.error('The username and password do not match.', 'Load Failed!');
+      main(document.getElementById('mainer'));
+    } else {
+      xml = localStorage.getItem("localXMLVal");
+      console.log("XML"+xml);
+      importXML();
+    }
   } else {
     xml = retrievedGraph;
     localStorage.setItem("localXMLVal", xml);

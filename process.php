@@ -5,9 +5,10 @@ $uname = (htmlspecialchars($_POST['username']));
 $filename = (htmlspecialchars($_POST['filename']));
 $contents = (htmlspecialchars($_POST['content']));
 // $content = "<script></script>";
+// echo "$contents";
 
 mysqli_query($connect,"INSERT INTO iit (uname, filename, contents)
-		        VALUES ('$uname','$filename','$contents')");
+		VALUES ('$uname','$filename','$contents');");
 
 if(mysqli_affected_rows($connect) > 0){
 	echo "<p>Form Added</p>";
