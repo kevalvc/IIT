@@ -14,10 +14,12 @@
   <title>Internship Project 1</title>
   <script src="js/jquery-3.2.1.min.js" charset="utf-8"></script>
   <script src="js/jquery-ui.min.js"></script>
+  <script src="js/toastr.min.js"></script>
   <script type="text/javascript">
     mxBasePath = 'src';
   </script>
 
+  <link rel="stylesheet" href="css/toastr.min.css"/>
   <link rel="stylesheet" href="css/bootstrap.min.css">
   <link rel="stylesheet" href="css/index.css">
   <link rel="stylesheet" href="css/hexagon.min.css">
@@ -57,7 +59,7 @@
                 <p><label for="username" class="modal-label">Your username</label><input type="text" class="form-control" size="30" name="username" id="uname" required/></p>
                 <p><label for="filename" class="modal-label">Your filename</label><input type="text" class="form-control" size="30" name="filename" id="fname" required/></p>
                 <p><input type="submit" class="btn btn-info" value="Retrieve Graph" name="commit" id="get-graph retrieve-graph" onclick=""/> or <input type="button" class="btn-info btn closebtn2" href="/" value="Cancel"></p>
-                <input type="text" class="hidden-xml-op" name="content" value="<?php echo ($xmlval); ?>" style="display: none !important;">
+                <input type="text" class="hidden-xml-op" name="contented" value="<?php echo ($xmlval); ?>" style="display: none !important;">
               </form>
             </div>
 
