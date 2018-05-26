@@ -16,6 +16,9 @@ $filename = $_GET['filename'];
 
 $sql = "SELECT * FROM iit where uname = '$uname' and filename = '$filename'";
 $result = mysqli_query($connect, $sql) or die ("Query failed");
+$num = mysqli_affected_rows($connect);
+echo $num;
+if ($num) {
 while($row = mysqli_fetch_array($result)){
   // echo ($row['contents']);
   $_SESSION['xmlcontents'] = $row['contents'];
@@ -25,6 +28,9 @@ while($row = mysqli_fetch_array($result)){
 
 }
 // fclose($fp);
+} else {
+  $_SESSION['xmlcontents'] = "";
+}
 
 echo $_SESSION['xmlcontents'];
 header('Location: index.php');
