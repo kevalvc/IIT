@@ -27,8 +27,8 @@
   <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
 </head>
 
-<body onload="main(document.getElementById('mainer'))">
-
+<body onload="">
+<!-- <body onload="main(document.getElementById('mainer'))"> -->
   <div class="container cont-main">
     <div class="row">
       <div class="col-md-3 agent-col">

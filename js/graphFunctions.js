@@ -9,6 +9,7 @@ var xml;
 var cells = [];
 var index = 0;
 
+main(document.getElementById('mainer'));
 // $(window).bind("load", function() {
 //   var code_text;
 //   var url = 'tempXmlFile.txt';
@@ -30,9 +31,8 @@ var index = 0;
 // request.send();
 // importXML();
 // });
-console.log("aadwe "+localStorage.getItem("localXMLVal"));
+
 if (localStorage.getItem("localXMLVal") == "" || localStorage.getItem("localXMLVal") == null) {
-  // alert("aa");
   retr();
 }
 
@@ -47,20 +47,22 @@ function redoChange() {
 
 // onFormSubmit : sets value of html after retrieval
 function retr() {
+  // main(document.getElementById('mainer'));
+  console.log("LS"+localStorage.getItem("localXMLVal"));
   var retrievedGraph = ($(".hidden-xml-op").val());
   if (retrievedGraph == "") {
     if (localStorage.getItem("localXMLVal") == "") {
       xml = '<mxGraphModel><root><mxCell id="0"/><mxCell id="1" parent="0"/></root></mxGraphModel>';
-      console.log("XML"+xml);
+      console.log("XML1"+xml);
       toastr.error('The username and password do not match.', 'Load Failed!');
-      main(document.getElementById('mainer'));
+      importXML();
     } else if (localStorage.getItem("localXMLVal") == null) {
       xml = '<mxGraphModel><root><mxCell id="0"/><mxCell id="1" parent="0"/></root></mxGraphModel>';
-      console.log("XML"+xml);
-      main(document.getElementById('mainer'));
+      console.log("XML2"+xml);
+      importXML();
     } else {
       xml = localStorage.getItem("localXMLVal");
-      console.log("XML"+xml);
+      console.log("XML3"+xml);
       importXML();
     }
   } else {
