@@ -86,11 +86,14 @@ body {
     max-width: 110px !important;
     font-size: x-small;
   }
+  .tool-pal {
+    font-size: 0.9rem !important;
+  }
 }
 
 #customfileupload, #dwnld-name  {
   width: 90% !important;
-  /* box-sizing: border-box !important; */
+  display: inline-flex !important;
   margin: 5px;
 }
 
@@ -215,7 +218,7 @@ canvas {
 }
 
 .tool-pal {
-  font-size: 1rem !important;
+  font-size: 1rem;
   background-color: #386998;
   color: white;
 }

@@ -30,8 +30,8 @@ var index = 0;
 // request.send();
 // importXML();
 // });
-
-if (localStorage.getItem("localXMLVal") == "") {
+console.log("aadwe "+localStorage.getItem("localXMLVal"));
+if (localStorage.getItem("localXMLVal") == "" || localStorage.getItem("localXMLVal") == null) {
   // alert("aa");
   retr();
 }
@@ -54,7 +54,11 @@ function retr() {
       console.log("XML"+xml);
       toastr.error('The username and password do not match.', 'Load Failed!');
       main(document.getElementById('mainer'));
-    } else {
+    } else if (localStorage.getItem("localXMLVal") == null) {
+      xml = '<mxGraphModel><root><mxCell id="0"/><mxCell id="1" parent="0"/></root></mxGraphModel>';
+      console.log("XML"+xml);
+      main(document.getElementById('mainer'));
+    } {
       xml = localStorage.getItem("localXMLVal");
       console.log("XML"+xml);
       importXML();

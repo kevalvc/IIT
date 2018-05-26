@@ -2,7 +2,6 @@
   session_start();
   if (isset($_SESSION['xmlcontents'])) {
     $xmlval = $_SESSION['xmlcontents'];
-
   } else {
     $xmlval = "";
   }
