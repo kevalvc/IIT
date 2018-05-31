@@ -1,5 +1,7 @@
 <?php include 'database.php';
 
+session_start();
+
 //create a variable
 $uname = (htmlspecialchars($_POST['username']));
 $filename = (htmlspecialchars($_POST['filename']));
@@ -9,7 +11,7 @@ $flag = 1;
 // echo "$contents";
 
 
-$connect=mysqli_connect('localhost','root','','mydatabase');
+$connect=mysqli_connect('localhost:3307','root','','mydatabase');
 if ($connect === false) {
     die("ERROR: Could not connect. " . mysqli_connect_error());
 }
@@ -21,7 +23,13 @@ while ($row = mysqli_fetch_array($result)) {
 	if($row['uname'] == $uname && $row['filename'] == $filename)
 	{
 	echo "Error : Similiar Filename and Usernames Exists";
-	$flag = 0;
+  // echo "TSTART \n";
+  // echo "<script>console.log('asasa');</script>";
+  // echo "<script>toastr.error('The username and password do not match.', 'Load Failed!');</script>";
+  // echo "yo";
+	$flag = 2;
+  $_SESSION['repeat'] = $flag;
+  header('Location: index.php');
 	break;
 	}
 }
@@ -34,6 +42,8 @@ mysqli_query($connect,"INSERT INTO iit (uname, filename, contents)
 if(mysqli_affected_rows($connect) > 0){
 	echo "<p>Form Added</p>";
 	echo $contents;
+  $flag = 1;
+  $_SESSION['repeat'] = $flag;
 	header('Location: index.php');
 } else {
 	echo "Form NOT Filled<br />";

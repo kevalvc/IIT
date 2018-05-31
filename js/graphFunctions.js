@@ -32,6 +32,26 @@ main(document.getElementById('mainer'));
 // importXML();
 // });
 
+function toasterOptions() {
+  toastr.options = {
+    "closeButton": true,
+    "debug": false,
+    "newestOnTop": false,
+    "progressBar": true,
+    "positionClass": "toast-top-right",
+    "preventDuplicates": false,
+    "onclick": null,
+    "showDuration": "300",
+    "hideDuration": "1000",
+    "timeOut": "2500",
+    "extendedTimeOut": "750",
+    "showEasing": "swing",
+    "hideEasing": "linear",
+    "showMethod": "fadeIn",
+    "hideMethod": "fadeOut"
+  };
+}
+
 if (localStorage.getItem("localXMLVal") == "" || localStorage.getItem("localXMLVal") == null) {
   retr();
 }
@@ -48,21 +68,23 @@ function redoChange() {
 // onFormSubmit : sets value of html after retrieval
 function retr() {
   // main(document.getElementById('mainer'));
-  console.log("LS"+localStorage.getItem("localXMLVal"));
+  // console.log("LS"+localStorage.getItem("localXMLVal"));
   var retrievedGraph = ($(".hidden-xml-op").val());
   if (retrievedGraph == "") {
     if (localStorage.getItem("localXMLVal") == "") {
       xml = '<mxGraphModel><root><mxCell id="0"/><mxCell id="1" parent="0"/></root></mxGraphModel>';
-      console.log("XML1"+xml);
+      localStorage.setItem("localXMLVal", xml);
+      // console.log("XML1"+xml);
+      toasterOptions();
       toastr.error('The username and password do not match.', 'Load Failed!');
       importXML();
     } else if (localStorage.getItem("localXMLVal") == null) {
       xml = '<mxGraphModel><root><mxCell id="0"/><mxCell id="1" parent="0"/></root></mxGraphModel>';
-      console.log("XML2"+xml);
+      // console.log("XML2"+xml);
       importXML();
     } else {
       xml = localStorage.getItem("localXMLVal");
-      console.log("XML3"+xml);
+      // console.log("XML3"+xml);
       importXML();
     }
   } else {
@@ -163,7 +185,6 @@ function loadFileAsText(event, onLoadFileHandler) {
 function onFileLoad(elementId, event) {
   // console.log(event.target.result);
   xml = event.target.result;
-  // console.log(xml);
   importXML();
 }
 
@@ -182,7 +203,6 @@ function downloadXML() {
   if (dloadname == "") {
     dloadname = "hello";
   }
-  // console.log(dloadname);
   download(dloadname + ".xml", mxUtils.getXml(node));
 }
 
@@ -203,7 +223,6 @@ function viewXML() {
   var encoder = new mxCodec();
   var node = encoder.encode(graph.getModel());
   xml = encodeURIComponent(mxUtils.getXml(node));
-  // console.log((mxUtils.getXml(node)));
   $(".hidden-xml-ip")[0].value = (mxUtils.getXml(node));
   localStorage.setItem("localXMLVal", mxUtils.getXml(node));
   mxUtils.popup(mxUtils.getPrettyXml(node), true);
@@ -214,10 +233,8 @@ function XMLSAVE() {
   var encoder = new mxCodec();
   var node = encoder.encode(graph.getModel());
   xml = encodeURIComponent(mxUtils.getXml(node));
-  // console.log((mxUtils.getXml(node)));
   $(".hidden-xml-ip")[0].value = (mxUtils.getXml(node));
   localStorage.setItem("localXMLVal", mxUtils.getXml(node));
-  // mxUtils.popup(mxUtils.getPrettyXml(node), true);
   // mxUtils.printScreen(graph);
 }
 
@@ -263,9 +280,7 @@ function XMLSAVE() {
 
 
 function deleteCells() {
-  //graph.getModel().beginUpdate();
   graph.removeCells(graph.getSelectionCells());
-  //graph.getModel().endUpdate();
 }
 
 function clearAll() {
@@ -286,8 +301,6 @@ function orderize() {
   var layout = new mxHierarchicalLayout(graph);
 
   parent = graph.getDefaultParent();
-  //console.log("Parent ");
-  //console.log(parent);
 
   // Adds a button to execute the layout
   var button = document.getElementById('heirarchical');
@@ -306,7 +319,6 @@ function addFSBEdge(container, token) {
   graph.getModel().beginUpdate();
   try {
     if (token == 1) {
-      // console.log('hello');
       p = 150;
       parent = graph.getDefaultParent();
       var cell = new mxCell('consist of', new mxGeometry(0, 7, 50, 50), 'curved=1;endArrow=classic;html=1;');
@@ -321,11 +333,9 @@ function addFSBEdge(container, token) {
 
       cell = graph.addCell(cell);
       graph.fireEvent(new mxEventObject('cellsInserted', 'cells', [cell]));
-      // console.log('bye');
       var style = graph.getStylesheet().getDefaultEdgeStyle();
 
     } else if (token == 2) {
-      // console.log('hello');
       p = 150;
       parent = graph.getDefaultParent();
       var cell = new mxCell('realized by', new mxGeometry(0, 7, 50, 50), 'curved=1;endArrow=classic;html=1;');
@@ -340,9 +350,7 @@ function addFSBEdge(container, token) {
 
       cell = graph.addCell(cell);
       graph.fireEvent(new mxEventObject('cellsInserted', 'cells', [cell]));
-      // console.log('bye');
     } else if (token == 3) {
-      // console.log('hello');
       p = 150;
       parent = graph.getDefaultParent();
       var cell = new mxCell('realized as', new mxGeometry(0, 7, 50, 50), 'curved=1;endArrow=classic;html=1;');
@@ -357,9 +365,7 @@ function addFSBEdge(container, token) {
 
       cell = graph.addCell(cell);
       graph.fireEvent(new mxEventObject('cellsInserted', 'cells', [cell]));
-      // console.log('bye');
     } else if (token == 4) {
-      // console.log('hello');
       p = 150;
       parent = graph.getDefaultParent();
       var cell = new mxCell('utilized by', new mxGeometry(0, 7, 50, 50), 'curved=1;endArrow=classic;html=1;');
@@ -374,7 +380,6 @@ function addFSBEdge(container, token) {
 
       cell = graph.addCell(cell);
       graph.fireEvent(new mxEventObject('cellsInserted', 'cells', [cell]));
-      // console.log('bye');
     }
     orderize();
   } catch (e) {
@@ -438,55 +443,35 @@ function addFSBVertex(container, token) {
   }
 };
 
-// function __Draw() {
-//   var encoder = new mxCodec();
-//   var result = encoder.encode(graph.getModel());
-//   var xml = encodeURIComponent(mxUtils.getXml(result));
-//   // var xml = mxUtils.getXml(EditorUi.editor.getGraphXml());
-//   // console.log('xml');
-// //console.log(xml);
-//   mxUtils.popup(mxUtils.getPrettyXml(xml), true);
-// var doc = mxUtils.createXmlDocument();
-// }
-
 function AutoSave() {
   graph.addListener(mxEvent.CELLS_MOVED, function() {
-    // console.log("aaaaa");
     XMLSAVE();
   });
   graph.addListener(mxEvent.CELLS_ADDED, function() {
-    // console.log("aaaaa");
     XMLSAVE();
   });
   graph.addListener(mxEvent.CELLS_RESIZED, function() {
-    // console.log("aaaaa");
     XMLSAVE();
   });
   graph.addListener(mxEvent.CELLS_REMOVED, function() {
-    // console.log("aaaaa");
     XMLSAVE();
   });
   graph.addListener(mxEvent.LABEL_CHANGED, function() {
-    // console.log("aaaaa");
     XMLSAVE();
   });
   $('#undo-btn').click(function() {
-    // alert("Handler for .click() called.");
     XMLSAVE();
   });
   $('#redo-btn').click(function() {
-    // alert("Handler for .click() called.");
     XMLSAVE();
   });
   $('.autolayout-btn').click(function() {
-    // alert("Handler for .click() called.");
     XMLSAVE();
   });
 }
 
 function main(container) {
   // if(!mxClient.IS_TOUCH)
-  // console.log("Yes");
 
   // ********************************************************************************************************************************************************
   // ********************************************************************************************************************************************************
@@ -790,7 +775,6 @@ function main(container) {
   }
 
   // Checks if xml exists
-  // console.log("localst: "+localStorage.getItem("localXMLVal"));
   if (localStorage.getItem("localXMLVal") != "") {
     xml = localStorage.getItem("localXMLVal");
     importXML();

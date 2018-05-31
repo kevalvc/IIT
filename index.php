@@ -18,7 +18,6 @@
   <script type="text/javascript">
     mxBasePath = 'src';
   </script>
-
   <link rel="stylesheet" href="css/toastr.min.css"/>
   <link rel="stylesheet" href="css/bootstrap.min.css">
   <link rel="stylesheet" href="css/index.css">
@@ -134,6 +133,19 @@
     </div>
   </div>
 </body>
+
+<?php
+echo " ";
+if (($_SESSION['repeat']) == 2) {
+  echo "  ";
+  echo "<script>toastr.error('Please enter a new filename.', 'The filename already exists!');</script>";
+  $_SESSION['repeat'] = 0;
+} else if (($_SESSION['repeat']) == 1) {
+  echo "  ";
+  echo "<script>toastr.success('The graph was successfully saved.', 'Save Successful!');</script>";
+  $_SESSION['repeat'] = 0;
+}
+?>
 
 <script type="text/javascript" src="js/mxClient.js"></script>
 <script type="text/javascript" src="js/tether.min.js" charset="utf-8"></script>
