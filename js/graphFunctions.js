@@ -459,6 +459,9 @@ function AutoSave() {
   graph.addListener(mxEvent.LABEL_CHANGED, function() {
     XMLSAVE();
   });
+  graph.addListener(mxEvent.CELL_CONNECTED, function() {
+    XMLSAVE();
+  });
   $('#undo-btn').click(function() {
     XMLSAVE();
   });
@@ -468,6 +471,12 @@ function AutoSave() {
   $('.autolayout-btn').click(function() {
     XMLSAVE();
   });
+  // var mgr = new mxAutoSaveManager(graph);
+  // mgr.save = function() {
+  //   mxLog.show();
+  //   mxLog.debug('save');
+  //   XMLSAVE();
+  // };
 }
 
 function main(container) {

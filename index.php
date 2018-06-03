@@ -105,15 +105,15 @@
               <h4 class="nodes-ws">NODES</h4>
               <br>
               <!-- <div class="circle-xs node-eles" onclick="gencircle()"><span class="f-text">F</span></div> -->
-              <img class="FVer" src="css\F.png" style="width:42px;height:42px;" onclick="addFSBVertex(mainer,1)">
+              <img class="FVer" src="css\F.png" style="width:42px;height:42px;" data-toggle="tooltip" data-placement="top" title="Function - It is the high level activities performed by the proposed system. It answers the question 'What all the proposed system does?'" onclick="addFSBVertex(mainer,1)">
               <br>
               <br>
               <!-- <div class="hexagon-xs hexagon-warning node-eles" onclick="genhex()">S</div> -->
-              <img class="SVer" src="css\S.png" style="width:42px;height:42px;" onclick="addFSBVertex(mainer,2)">
+              <img class="SVer" src="css\S.png" style="width:42px;height:42px;" data-toggle="tooltip" data-placement="top" title="Structure - The components required for implementing the function. It answers the question 'What are the visible/invisible components required to implement the function?'" onclick="addFSBVertex(mainer,2)">
               <br>
               <br>
               <!-- <div class="rect-xs node-eles" onclick="genrect()">B</div> -->
-              <img class="BVer" src="css\B.png" style="width:48px;height:34px;" onclick="addFSBVertex(mainer,3)">
+              <img class="BVer" src="css\B.png" style="width:48px;height:34px;" data-toggle="tooltip" data-placement="top" title="Behaviour - The working of the components together to achieve the function. It answers the question of 'How the components work together to achieve the function?'" onclick="addFSBVertex(mainer,3)">
               <br>
               <br>
               <h4 class="nodes-ws">CONNECTORS</h4>
@@ -160,6 +160,9 @@ if (($_SESSION['repeat']) == 2) {
   };
   $('input[type=file]').change(function(e) {
     $('#customfileupload').html($(this).val());
+  });
+  $(document).ready(function(){
+    $('[data-toggle="tooltip"]').tooltip();
   });
 </script>
 
