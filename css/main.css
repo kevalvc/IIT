@@ -1,0 +1,133 @@
+body {
+  background: #fe9a8b;
+  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #f97590, #fe9a8b);
+  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #f97590, #fe9a8b);
+}
+
+.cont {
+  width: 55%;
+  /* overflow: auto; */
+  /* margin-top: 125px;
+  margin-bottom: 125px; */
+  /* position: absolute; */
+  /* border: solid black; */
+}
+
+.h1-header {
+  font-family: Raleway;
+  font-weight: medium;
+}
+
+.bor-wid {
+  margin-left: 0px;
+  margin-top: 0px;
+  color: #fd868c;
+  width: 20%;
+  border-top: 3px solid #fd868c;
+}
+
+.inner-data, .inner-data-2, .inner-data-3, .inner-data-4, .inner-data-5 {
+  background-color: white;
+  border-radius: 1.5%;
+  font-family: Raleway;
+  font-weight: 500;
+  margin: 45px 35px;
+  padding: 85px 85px;
+  padding-bottom: 115px;
+  border: 2px solid #fd868c;
+}
+
+.new-profile {
+  background-color: transparent;
+  border: none;
+  border-bottom: 1px solid #CCC;
+  color: #555;
+  box-sizing: border-box;
+  font-family: 'Arvo';
+  font-size: 18px;
+  height: 50px;
+  left: 50%;
+  /* margin: -25px 0 0 -100px; */
+  /* padding: 10px 0px; */
+  /* position: relative; */
+  top: 50%;
+  width: 200px;
+}
+.new-profile:focus {
+  outline: none;
+}
+
+.layers {
+  margin-bottom: 3.5px;
+}
+
+.caption {
+  display: block;
+}
+
+.img-text {
+  vertical-align: top;
+  display: inline-block;
+  text-align: center;
+  width: 80px;
+}
+
+.form-group-2, .form-group-3, .form-group-4, .form-group-5 {
+  display: none;
+}
+
+.inner-data-2, .inner-data-3, .inner-data-4, .inner-data-5 {
+  display: none;
+}
+
+.casa-text {
+  margin-top: 40%;
+  font-size: 25px;
+  font-family: raleway;
+}
+
+.final-pg {
+  margin-bottom: 45px;
+}
+
+.next-btn, .next-btn-2, .next-btn-3, .next-btn-4, .next-btn-5 {
+  display: inline;
+  float: right;
+  height: 45px;
+  width: 120px;
+  border-radius: 40px;
+  font-family: 'Roboto', sans-serif;
+  font-size: 17px;
+  /* text-transform: uppercase; */
+  letter-spacing: 2.5px;
+  font-weight: 500;
+  color: white;
+  background-color: #fd868c;
+  border: none;
+  border-radius: 45px;
+  transition: all 0.3s ease 0s;
+  cursor: pointer;
+  outline: none;
+  margin-bottom: 105px;
+}
+
+.skintro {
+  margin: auto;
+  height: 45px;
+  width: 160px;
+  border-radius: 40px;
+  font-family: 'Roboto', sans-serif;
+  font-size: 15px;
+  /* text-transform: uppercase; */
+  letter-spacing: 2.5px;
+  font-weight: 500;
+  color: black;
+  background-color: white;
+  border: none;
+  border-radius: 45px;
+  transition: all 0.3s ease 0s;
+  cursor: pointer;
+  outline: none;
+}

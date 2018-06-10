@@ -136,14 +136,16 @@
 
 <?php
 echo " ";
-if (($_SESSION['repeat']) == 2) {
-  echo "  ";
-  echo "<script>toastr.error('Please enter a new filename.', 'The filename already exists!');</script>";
-  $_SESSION['repeat'] = 0;
-} else if (($_SESSION['repeat']) == 1) {
-  echo "  ";
-  echo "<script>toastr.success('The graph was successfully saved.', 'Save Successful!');</script>";
-  $_SESSION['repeat'] = 0;
+if (isset($_SESSION['repeat'])) {
+  if (($_SESSION['repeat']) == 2) {
+    echo "  ";
+    echo "<script>toastr.error('Please enter a new filename.', 'The filename already exists!');</script>";
+    $_SESSION['repeat'] = 0;
+  } else if (($_SESSION['repeat']) == 1) {
+    echo "  ";
+    echo "<script>toastr.success('The graph was successfully saved.', 'Save Successful!');</script>";
+    $_SESSION['repeat'] = 0;
+  }
 }
 ?>
 
