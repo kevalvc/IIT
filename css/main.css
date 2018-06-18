@@ -131,3 +131,19 @@ body {
   cursor: pointer;
   outline: none;
 }
+
+@media (max-width: 1324px) {
+    .cont {
+        width: 65%;
+    }
+}
+@media (max-width: 1124px) {
+    .cont {
+        width: 75%;
+    }
+}
+@media (max-width: 970px) {
+    .cont {
+        width: 85%;
+    }
+}
