@@ -35,113 +35,112 @@
         <input type="submit" class="btn skintro" name="skip-intro" value="Skip Intro">
       </div>
 
-    <div class="inner-data-2">
-      <div class="row">
-        <div class="col-5">
-          <img src="css/agenteclipse.png" height="150" width="150" alt="" style="position: absolute;left: -2px;top: 80px;}">
-          <img src="css/casa.png" height="320" width="115" alt="" style="position: relative;">
-        </div>
-        <div class="col-7">
-          <div class="text-center casa-text">
-            <div>Hello, Welcome to</div>
-            <div>&lt; AppName &gt;</div>
-            <div>I am <span style="color: grey;">'Casa'</span></div>
+      <div class="inner-data-2">
+        <div class="row">
+          <div class="col-5">
+            <img src="css/agenteclipse.png" height="150" width="150" alt="" style="position: absolute;left: -2px;top: 80px;}">
+            <img src="css/casa.png" height="320" width="115" alt="" style="position: relative;">
+          </div>
+          <div class="col-7">
+            <div class="text-center casa-text">
+              <div>Hello, Welcome to</div>
+              <div>&lt; AppName &gt;</div>
+              <div>I am <span style="color: grey;">'Casa'</span></div>
+            </div>
           </div>
         </div>
+        <input type="submit" class="next-btn-2" name="Next2" value=" Next >">
       </div>
-      <input type="submit" class="next-btn-2" name="Next2" value=" Next >">
-    </div>
-    <div class="form-group-2 text-center">
-      <input type="submit" class="btn skintro" name="skip-intro" value="Skip Intro">
-    </div>
-
-    <div class="inner-data-3">
-      <div class="row">
-        <div class="col-5">
-          <img src="css/agenteclipse.png" height="150" width="150" alt="" style="position: absolute;left: -2px;top: 80px;}">
-          <img src="css/casa.png" height="320" width="115" alt="" style="position: relative;">
-        </div>
-        <div class="col-7">
-          <div class="text-center casa-text">
-            <div>We will work together</div>
-            <div>to create a conceptual</div>
-            <div>design of a software</div>
-          </div>
-        </div>
+      <div class="form-group-2 text-center">
+        <input type="submit" class="btn skintro" name="skip-intro" value="Skip Intro">
       </div>
-      <input type="submit" class="next-btn-3" name="Next3" value=" Next >">
-    </div>
-    <div class="form-group-3 text-center">
-      <input type="submit" class="btn skintro" name="skip-intro" value="Skip Intro">
-    </div>
 
-    <div class="inner-data-4">
-      <div class="row">
-        <div class="col-5">
-          <img src="css/agenteclipse.png" height="150" width="150" alt="" style="position: absolute;left: -2px;top: 80px;}">
-          <img src="css/casa.png" height="320" width="115" alt="" style="position: relative;">
-        </div>
-        <div class="col-7">
-          <div class="text-center casa-text" style="margin-top: 0;">
-            <div class="row">choose your profile</div>
-            <hr class="bor-wid">
-            <div class="layers">
-            <span class="col-4 img-text">
-              <img src="css/Layer2.png" alt="" height="55" width="55">
-              <span class="caption">abc</span>
-            </span>
-            <span class="col-4 img-text">
-              <img src="css/Layer2.png" alt="" height="55" width="55">
-              <span class="caption">def</span>
-            </span>
-            <span class="col-4 img-text">
-              <img src="css/Layer2.png" alt="" height="55" width="55">
-              <span class="caption">ghi</span>
-            </span>
+      <div class="inner-data-3">
+        <div class="row">
+          <div class="col-5">
+            <img src="css/agenteclipse.png" height="150" width="150" alt="" style="position: absolute;left: -2px;top: 80px;}">
+            <img src="css/casa.png" height="320" width="115" alt="" style="position: relative;">
           </div>
-            <br>
-            <div class="row">New profile?</div>
-            <hr class="bor-wid">
-            <input type="text" class="new-profile" name="" value="" placeholder="type your name">
+          <div class="col-7">
+            <div class="text-center casa-text">
+              <div>We will work together</div>
+              <div>to create a conceptual</div>
+              <div>design of a software</div>
+            </div>
           </div>
         </div>
+        <input type="submit" class="next-btn-3" name="Next3" value=" Next >">
       </div>
-      <input type="submit" class="next-btn-4" name="Next4" value=" Next >">
-    </div>
-    <div class="form-group-4 text-center">
-      <input type="submit" class="btn skintro" name="skip-intro" value="Skip Intro">
-    </div>
-
-    <div class="inner-data-5">
-      <div class="row">
-        <div class="col-5">
-          <img src="css/agenteclipse.png" height="150" width="150" alt="" style="position: absolute;left: -2px;top: 80px;}">
-          <img src="css/casa.png" height="320" width="115" alt="" style="position: relative;">
-        </div>
-        <div class="col-7">
-          <div class="text-center casa-text" style="margin-top: 0; font-size: 17px;">
-            <div class="row final-pg">"Username" pick any one of the problems to create conceptual design</div>
-            <div class="layers">
-            <span class="col-4 img-text">
-              <img src="css/fingerprint.png" alt="" height="75" width="75">
-            </span>
-            <span class="col-4 img-text">
-              <img src="css/musicplayer.png" alt="" height="75" width="75">
-            </span>
-            <span class="col-4 img-text">
-              <img src="css/recipe.png" alt="" height="75" width="75">
-            </span>
-          </div>
-          </div>
-        </div>
+      <div class="form-group-3 text-center">
+        <input type="submit" class="btn skintro" name="skip-intro" value="Skip Intro">
       </div>
-      <input type="submit" class="next-btn-5" name="Next5" value=" Next >">
-    </div>
-    <div class="form-group-5 text-center">
-      <input type="submit" class="btn skintro" name="skip-intro" value="Skip Intro">
-    </div>
 
-  </div>
+      <div class="inner-data-4">
+        <div class="row">
+          <div class="col-5">
+            <img src="css/agenteclipse.png" height="150" width="150" alt="" style="position: absolute;left: -2px;top: 80px;}">
+            <img src="css/casa.png" height="320" width="115" alt="" style="position: relative;">
+          </div>
+          <div class="col-7">
+            <div class="text-center casa-text" style="margin-top: 0;">
+              <div class="row">choose your profile</div>
+              <hr class="bor-wid">
+              <div class="layers">
+              <span class="col-4 img-text">
+                <img src="css/Layer2.png" alt="" height="55" width="55">
+                <span class="caption">abc</span>
+              </span>
+              <span class="col-4 img-text">
+                <img src="css/Layer2.png" alt="" height="55" width="55">
+                <span class="caption">def</span>
+              </span>
+              <span class="col-4 img-text">
+                <img src="css/Layer2.png" alt="" height="55" width="55">
+                <span class="caption">ghi</span>
+              </span>
+            </div>
+              <br>
+              <div class="row">New profile?</div>
+              <hr class="bor-wid">
+              <input type="text" class="new-profile" name="" value="" placeholder="type your name">
+            </div>
+          </div>
+        </div>
+        <input type="submit" class="next-btn-4" name="Next4" value=" Next >">
+      </div>
+      <div class="form-group-4 text-center">
+        <input type="submit" class="btn skintro" name="skip-intro" value="Skip Intro">
+      </div>
+
+      <div class="inner-data-5">
+        <div class="row">
+          <div class="col-5">
+            <img src="css/agenteclipse.png" height="150" width="150" alt="" style="position: absolute;left: -2px;top: 80px;}">
+            <img src="css/casa.png" height="320" width="115" alt="" style="position: relative;">
+          </div>
+          <div class="col-7">
+            <div class="text-center casa-text" style="margin-top: 0; font-size: 17px;">
+              <div class="row final-pg">"Username" pick any one of the problems to create conceptual design</div>
+              <div class="layers">
+              <span class="col-4 img-text">
+                <img src="css/fingerprint.png" alt="" height="75" width="75">
+              </span>
+              <span class="col-4 img-text">
+                <img src="css/musicplayer.png" alt="" height="75" width="75">
+              </span>
+              <span class="col-4 img-text">
+                <img src="css/recipe.png" alt="" height="75" width="75">
+              </span>
+            </div>
+            </div>
+          </div>
+        </div>
+        <input type="submit" class="next-btn-5" name="Next5" value=" Next >">
+      </div>
+      <div class="form-group-5 text-center">
+        <input type="submit" class="btn skintro" name="skip-intro" value="Skip Intro">
+      </div>
+    </div>
   </body>
   <script type="text/javascript">
   $("input[name='Next']").click(function() {
@@ -171,5 +170,8 @@
   $(".next-btn-5").click(function() {
     window.location ='http://localhost:8080/IDP-ET/index.php';
   });
+  $(".skintro").click(function() {
+    window.location ='http://localhost:8080/IDP-ET/index.php';
+  })
   </script>
 </html>

@@ -32,6 +32,16 @@ main(document.getElementById('mainer'));
 // importXML();
 // });
 
+function swappal() {
+  if ($('.og-pal').css('display') == 'none') {
+    $(".can-pal").css('display', 'none');
+    $(".og-pal").css('display', 'block');
+  } else {
+    $(".can-pal").css('display', 'block');
+    $(".og-pal").css('display', 'none');
+  }
+}
+
 function toasterOptions() {
   toastr.options = {
     "closeButton": true,

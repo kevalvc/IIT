@@ -1,5 +1,5 @@
-<?php include 'database.php';
-
+<?php
+// include 'database.php';
 session_start();
 
 //create a variable
