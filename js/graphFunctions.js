@@ -4,6 +4,7 @@ var x = 60,
   q = 100;
 var graph;
 var parent;
+var rubberband;
 var undoManager;
 var xml;
 var cells = [];
@@ -36,9 +37,11 @@ function swappal() {
   if ($('.og-pal').css('display') == 'none') {
     $(".can-pal").css('display', 'none');
     $(".og-pal").css('display', 'block');
+
   } else {
     $(".can-pal").css('display', 'block');
     $(".og-pal").css('display', 'none');
+	
   }
 }
 
@@ -543,10 +546,13 @@ function main(container) {
 
   var graphs = [];
   graph = new mxGraph(container);
+  rubberband = new mxRubberband(graph);
   parent = graph.getDefaultParent();
   graph.centerZoom = false;
   graph.setConnectable(true);
+  graph.graphHandler.scaleGrid = true;
   graph.setPanning(true);
+  graph.setCellsEditable(false); //so that connectors and vertices cannot be edited
   undoManager = new mxUndoManager();
   var listener = function(sender, evt) {
     undoManager.undoableEditHappened(evt.getProperty('edit'));
@@ -554,7 +560,7 @@ function main(container) {
   graph.getModel().addListener(mxEvent.UNDO, listener);
   graph.getView().addListener(mxEvent.UNDO, listener);
 
-  var rubberband = new mxRubberband(graph);
+  
 
   // graph.maximumGraphBounds = new mxRectangle(0, 0, parseInt($('.main-ws').width()), parseInt($('.main-ws').height()));
   var style = graph.getStylesheet().getDefaultVertexStyle();
