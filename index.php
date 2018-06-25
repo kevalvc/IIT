@@ -83,7 +83,9 @@
         <!-- <br> -->
         <div class="row ws-data">
           <div class="col-md-12 text-center extra-data">
-            <span style="display: inline-block;" class="qn-text">Q1. Hello this is a random question of a minimum of 10 words to be displayed in the text area so please recheck it to adjust!</span>
+            <span style="display: inline-block;" class="qn-text">
+              <!-- Q1. Hello this is a random question of a minimum of 10 words to be displayed in the text area so please recheck it to adjust! -->
+            </span>
             <div class="col-md-2 tp-full-left text-center floater og-pal">
               <h4 class="tool-pal">CANVAS PALETTE</h4>
               <br>

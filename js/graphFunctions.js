@@ -42,6 +42,17 @@ function swappal() {
   }
 }
 
+var typo = 2;
+
+$(document).ready(function() {
+  $.ajax({
+      url: "database.php/",
+      data: 'type='+typo,
+    }).done(function(data){
+      $('.qn-text').empty().append(" " + data + " ");
+  });
+})
+
 function toasterOptions() {
   toastr.options = {
     "closeButton": true,
