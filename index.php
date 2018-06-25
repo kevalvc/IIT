@@ -34,11 +34,14 @@
         <div class="agent-img text-center">
         <img src="css/agent.png" alt="" class="agent-sizer" style="border-radius: 50%; margin-bottom: 25px;">
           <br>
-          <p class="text-center agent-text">I'm going to give you a tour of the Workspace. Let's get started!</p>
+          <p class="text-center agent-text noselect">I'm going to give you a tour of the Workspace. Let's get started!</p>
           <input type="submit" class="text-center skip-intro" name="" value="Skip Intro">
         </div>
       </div>
       <div class="col-10 main-data">
+        <span class="main-hide">
+          <button type="button" name="a-close" class="agent-closer" onclick="hidagent()"><i class="fa fa-arrow-left arrow-left" aria-hidden="true"></i></button>
+        </span>
         <div class="my-navbar text-center">
           <div class="header-placer">
             <span class="ws-ele" style="float:left;"><h3 class="Workspace">WORKSPACE</h3></span>
@@ -83,14 +86,14 @@
         <!-- <br> -->
         <div class="row ws-data">
           <div class="col-md-12 text-center extra-data">
-            <span style="display: inline-block;" class="qn-text">
+            <span style="display: inline-block;" class="qn-text noselect">
               <!-- Q1. Hello this is a random question of a minimum of 10 words to be displayed in the text area so please recheck it to adjust! -->
             </span>
             <div class="col-md-2 tp-full-left text-center floater og-pal">
-              <h4 class="tool-pal">CANVAS PALETTE</h4>
+              <h4 class="tool-pal noselect">CANVAS PALETTE</h4>
               <br>
-              <span class="ws-ele"><input type="submit" class="btn btn-info btn-in" name="" onclick="zoomIn()" value="+"></span>
-              <span class="ws-ele"><input type="submit" class="btn btn-info btn-out" name="" onclick="zoomOut()"  value="-"></span>
+              <span class="ws-ele"><input type="submit" class="btn btn-in btn-info" name="" onclick="zoomIn()" value="+"></span>
+              <span class="ws-ele"><input type="submit" class="btn btn-out btn-info" name="" onclick="zoomOut()"  value="-"></span>
               <!-- <br> -->
               <span class="saver ws-ele text-center blocker" style=""><input id="heirarchical" type="submit" class="autolayout-btn btn btn-info text-center left-toolbar" name="" onclick="" value="Auto Layout"></span>
               <!-- <br> -->
@@ -110,7 +113,7 @@
               <span class="saver ws-ele text-center" style=""><input type="submit" class="btn btn-info text-center left-toolbar swap-btn" name="" onclick="swappal()" value="TOOLS PALETTE"></span>
             </div>
             <div class="col-md-2 tp-full-left text-center floater can-pal">
-              <h4 class="tool-pal">TOOLS PALETTE</h4>
+              <h4 class="tool-pal noselect">TOOLS PALETTE</h4>
               <br>
               <!-- <br> -->
               <span class="saver ws-ele text-center blocker" style=""><input type="submit" class="btn btn-info text-center left-toolbar" name="" onclick="undoChange()" id="undo-btn" value="Undo"></span>

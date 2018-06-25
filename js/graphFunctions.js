@@ -53,6 +53,17 @@ $(document).ready(function() {
   });
 })
 
+$('.agent-closer').hover(function() {
+  $(this).fadeTo(1,1);
+}, function() {
+  $(this).fadeTo(1,0);
+});
+$('.agent-col').hover(function() {
+  $('.agent-closer').fadeTo(1,1);
+}, function() {
+  $('.agent-closer').fadeTo(1,0);
+});
+
 function toasterOptions() {
   toastr.options = {
     "closeButton": true,
@@ -71,6 +82,18 @@ function toasterOptions() {
     "showMethod": "fadeIn",
     "hideMethod": "fadeOut"
   };
+}
+
+function hidagent() {
+  if ($('.main-data').hasClass('col-10')) {
+    $('.agent-col').hide();
+    $('.main-data').removeClass('col-10').addClass('col-12');
+    $('.arrow-left').removeClass('fa-arrow-left').addClass('fa-arrow-right');
+  } else {
+    $('.agent-col').show();
+    $('.main-data').removeClass('col-12').addClass('col-10');
+    $('.arrow-left').removeClass('fa-arrow-right').addClass('fa-arrow-left');
+  }
 }
 
 if (localStorage.getItem("localXMLVal") == "" || localStorage.getItem("localXMLVal") == null) {
@@ -676,7 +699,6 @@ function main(container) {
       repaintGrid();
     };
   })();
-
 
   (function() {
     // Enables rotation handle

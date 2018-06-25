@@ -83,13 +83,14 @@ body {
 }
 
 .casa-text {
-  margin-top: 40%;
+  margin-top: 32%;
   font-size: 25px;
   font-family: raleway;
 }
 
 .final-pg {
   margin-bottom: 45px;
+  margin-top: 20%;
 }
 
 .next-btn, .next-btn-2, .next-btn-3, .next-btn-4, .next-btn-5 {

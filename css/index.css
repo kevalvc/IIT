@@ -43,6 +43,7 @@ body {
 
 .swap-btn {
   margin-top: 25%;
+  font-size: 0.8rem;
 }
 
 .og-pal {}
@@ -95,7 +96,43 @@ body {
   /* z-index: 0; */
   color: white;
   padding-top: 50px;
+  position: relative;
+  display: block;
+  /* width:100%; */
 }
+
+.agent-closer {
+  /* display: none; */
+  /* visibility: hidden; */
+  opacity:0;
+  position: absolute;
+  background: #f78ca0;
+  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to bottom, #fe9a8b, #f78ca0);
+
+  background: linear-gradient(to bottom, #fe9a8b, #f78ca0);
+  /* display: inline-block; */
+  /* margin: 0 1em 1em 0; */
+  height: 50px;
+  width: 30px;
+  border-bottom-right-radius: 50px;
+  border-top-right-radius: 50px;
+  border-style: hidden;
+  top: 45%;
+  left: 0%;
+  z-index: 15;
+  padding-left: 0;
+  color: #DCDCDC;
+}
+
+.agent-closer:focus {
+  outline:0 !important;
+}
+
+.hidden{
+  visibility: hidden;
+}
+
 
 .agent-img {
   /* min-height: 100%;
@@ -195,11 +232,13 @@ body {
   background-color: #182e43 !important;
   border-color: #284b6d !important;
   margin-left: 5%;
+  margin-bottom: 5px;
 }
 
 .btn-out {
   background-color: #182e43 !important;
   border-color: #284b6d !important;
+  margin-bottom: 5px;
 }
 
 .my-navbar {
@@ -472,4 +511,14 @@ modal-label {
   background-color: #284b6d;
   border-color: #284b6d;
   border-radius: 40px;
+}
+
+.noselect {
+  -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome and Opera */
 }
