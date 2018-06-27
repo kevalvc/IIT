@@ -11,7 +11,7 @@ $flag = 1;
 // echo "$contents";
 
 
-$connect=mysqli_connect('localhost','root','','mydatabase');
+$connect=mysqli_connect('localhost:3307','root','','mydatabase');
 if ($connect === false) {
     die("ERROR: Could not connect. " . mysqli_connect_error());
 }

@@ -190,6 +190,23 @@ body {
   display: block !important;
 }
 
+.tool-blocker {
+  display: block !important;
+  margin-bottom: 3%;
+  margin-right: 0;
+}
+
+.dd-btn {
+  padding: 0;
+}
+
+.dropdown-menu {
+  background-color: #284b6d;
+  top: 0%;
+  left: 98%;
+  min-width: 7.5rem;
+}
+
 .floater {
   float: left;
 }

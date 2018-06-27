@@ -8,7 +8,7 @@
 // }
 
 
-	$con = mysqli_connect('localhost','root','', "mydatabase");
+	$con = mysqli_connect('localhost:3307','root','', "mydatabase");
 	if ($con === false) {
 			die("ERROR: Could not connect. " . mysqli_connect_error());
 	}
