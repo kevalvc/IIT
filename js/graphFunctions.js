@@ -41,7 +41,7 @@ function swappal() {
   } else {
     $(".can-pal").css('display', 'block');
     $(".og-pal").css('display', 'none');
-	
+
   }
 }
 
@@ -560,7 +560,7 @@ function main(container) {
   graph.getModel().addListener(mxEvent.UNDO, listener);
   graph.getView().addListener(mxEvent.UNDO, listener);
 
-  
+
 
   // graph.maximumGraphBounds = new mxRectangle(0, 0, parseInt($('.main-ws').width()), parseInt($('.main-ws').height()));
   var style = graph.getStylesheet().getDefaultVertexStyle();
@@ -602,6 +602,7 @@ function main(container) {
       canvas.style.top = '0px';
       canvas.style.left = '0px';
       canvas.style.zIndex = -1;
+      canvas.style.width = '100%';
       graph.container.appendChild(canvas);
 
       var ctx = canvas.getContext('2d');
