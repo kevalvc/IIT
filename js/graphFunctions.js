@@ -609,6 +609,7 @@ function main(container) {
       canvas.style.top = '0px';
       canvas.style.left = '0px';
       canvas.style.zIndex = -1;
+      canvas.style.width = '100%';
       graph.container.appendChild(canvas);
 
       var ctx = canvas.getContext('2d');
