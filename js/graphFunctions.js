@@ -3,6 +3,7 @@ var x = 60,
   p = 150,
   q = 100;
 var graph;
+// var canvas;
 var parent;
 var rubberband;
 var undoManager;
@@ -41,7 +42,6 @@ function swappal() {
   } else {
     $(".can-pal").css('display', 'block');
     $(".og-pal").css('display', 'none');
-	
   }
 }
 
@@ -97,7 +97,14 @@ function hidagent() {
     $('.main-data').removeClass('col-12').addClass('col-10');
     $('.arrow-left').removeClass('fa-arrow-right').addClass('fa-arrow-left');
   }
+  // dynamGrid();
 }
+
+$('.agent-closer').on('click', function() {
+  console.log("2323");
+  dynamGrid();
+  console.log("2323");
+});
 
 if (localStorage.getItem("localXMLVal") == "" || localStorage.getItem("localXMLVal") == null) {
   retr();
@@ -560,7 +567,7 @@ function main(container) {
   graph.getModel().addListener(mxEvent.UNDO, listener);
   graph.getView().addListener(mxEvent.UNDO, listener);
 
-  
+
 
   // graph.maximumGraphBounds = new mxRectangle(0, 0, parseInt($('.main-ws').width()), parseInt($('.main-ws').height()));
   var style = graph.getStylesheet().getDefaultVertexStyle();
