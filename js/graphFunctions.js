@@ -206,7 +206,7 @@ function retr() {
       localStorage.setItem("localXMLVal", xml);
       // console.log("XML1"+xml);
       toasterOptions();
-      toastr.error('The username and password do not match.', 'Load Failed!');
+      toastr.error('The username and filename do not match.', 'Load Failed!');
       importXML();
     } else if (localStorage.getItem("localXMLVal") == null) {
       xml = '<mxGraphModel><root><mxCell id="0"/><mxCell id="1" parent="0"/></root></mxGraphModel>';
