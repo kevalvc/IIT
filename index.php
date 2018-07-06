@@ -92,8 +92,8 @@
             <div class="col-md-2 tp-full-left text-center floater og-pal">
               <h4 class="tool-pal noselect">CANVAS PALETTE</h4>
               <br>
-              <span class="ws-ele"><input type="submit" class="btn btn-in btn-info" name="" onclick="zoomIn()" value="+"></span>
-              <span class="ws-ele"><input type="submit" class="btn btn-out btn-info" name="" onclick="zoomOut()"  value="-"></span>
+              <span class="ws-ele"><button type="submit" class="btn btn-in btn-info magnify" name="" onclick="zoomIn()"><i class="fa fa-search-plus"></i></button></span>
+              <span class="ws-ele"><button type="submit" class="btn btn-out btn-info magnify" name="" onclick="zoomOut()"><i class="fa fa-search-minus"></i></button></span>
               <!-- <br> -->
               <span class="saver ws-ele text-center blocker" style=""><input id="heirarchical" type="submit" class="autolayout-btn btn btn-info text-center left-toolbar" name="" onclick="" value="Auto Layout"></span>
               <!-- <br> -->

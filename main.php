@@ -123,13 +123,13 @@
               <div class="row final-pg">"Username" pick any one of the problems to create conceptual design</div>
               <div class="layers">
               <span class="col-4 img-text">
-                <img src="css/fingerprint.png" alt="" height="75" width="75">
+                <img src="css/fingerprint.png" alt="" height="75" width="75" onclick="qtype(1)">
               </span>
               <span class="col-4 img-text">
-                <img src="css/musicplayer.png" alt="" height="75" width="75">
+                <img src="css/musicplayer.png" alt="" height="75" width="75" onclick="qtype(2)">
               </span>
               <span class="col-4 img-text">
-                <img src="css/recipe.png" alt="" height="75" width="75">
+                <img src="css/recipe.png" alt="" height="75" width="75" onclick="qtype(3)">
               </span>
             </div>
             </div>
@@ -173,5 +173,21 @@
   $(".skintro").click(function() {
     window.location ='http://localhost:8080/IDP-ET/index.php';
   })
+  function qtype(i) {
+    if (i == 1) {
+      localStorage.setItem("qnno", "1");
+      console.log("1");
+      // window.location.href = "http://sidanmor.com";
+      $(location).attr('href', 'http://localhost:8080/IDP-ET/index.php')
+    } else if (i == 2) {
+      localStorage.setItem("qnno", "2");
+      $(location).attr('href', 'http://localhost:8080/IDP-ET/index.php')
+      console.log("2");
+    } else if (i == 3) {
+      localStorage.setItem("qnno", "3");
+      $(location).attr('href', 'http://localhost:8080/IDP-ET/index.php')
+      console.log("3");
+    }
+  }
   </script>
 </html>

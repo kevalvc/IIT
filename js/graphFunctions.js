@@ -126,26 +126,26 @@ function swappal() {
   }
 }
 
-var typo = 2;
+var typo = localStorage.getItem("qnno");
 
 $(document).ready(function() {
   $.ajax({
-      url: "database.php/",
-      data: 'type='+typo,
-    }).done(function(data){
-      $('.qn-text').empty().append(" " + data + " ");
+    url: "database.php/",
+    data: 'type=' + typo,
+  }).done(function(data) {
+    $('.qn-text').empty().append(" " + data + " ");
   });
 })
 
 $('.agent-closer').hover(function() {
-  $(this).fadeTo(1,1);
+  $(this).fadeTo(1, 1);
 }, function() {
-  $(this).fadeTo(1,0);
+  $(this).fadeTo(1, 0);
 });
 $('.agent-col').hover(function() {
-  $('.agent-closer').fadeTo(1,1);
+  $('.agent-closer').fadeTo(1, 1);
 }, function() {
-  $('.agent-closer').fadeTo(1,0);
+  $('.agent-closer').fadeTo(1, 0);
 });
 
 function toasterOptions() {
@@ -467,10 +467,11 @@ function addFSBEdge(container, token) {
       // cell.geometry.points = [new mxPoint(50, 50), new mxPoint(0, 0)];
       cell.geometry.relative = true;
       cell.edge = true;
+      var style = graph.getStylesheet().getDefaultEdgeStyle();
+      style[mxConstants.STYLE_EDITABLE] = 0;
 
       cell = graph.addCell(cell);
       graph.fireEvent(new mxEventObject('cellsInserted', 'cells', [cell]));
-      var style = graph.getStylesheet().getDefaultEdgeStyle();
 
     } else if (token == 2) {
       p = 150;
@@ -642,7 +643,7 @@ function main(container) {
   graph.setConnectable(true);
   graph.graphHandler.scaleGrid = true;
   graph.setPanning(true);
-  graph.setCellsEditable(false); //so that connectors and vertices cannot be edited
+  graph.setCellsEditable(true); //so that connectors and vertices cannot be edited
   undoManager = new mxUndoManager();
   var listener = function(sender, evt) {
     undoManager.undoableEditHappened(evt.getProperty('edit'));
@@ -711,7 +712,7 @@ function main(container) {
       var h = 0;
 
       //Repaint grid
-        repaintGrid();
+      repaintGrid();
     } catch (e) {
       //mxLog.show();
       //mxLog.debug('Using background image');
@@ -927,14 +928,14 @@ function main(container) {
   // var ds = mxUtils.makeDraggable(img, graphF, funct, dragElt, null, null, graph.autoscroll, true);
   // var ds2 = mxUtils.makeDraggable(img2, graphF, funct2, dragElt, null, null, graph.autoscroll, true);
   // var ds3 = mxUtils.makeDraggable(img3, graphF, funct3, dragElt, null, null, graph.autoscroll, true);
-  var ds = mxUtils.makeDraggable(img, graphF, funct, dragElt);
-  var ds2 = mxUtils.makeDraggable(img2, graphF, funct2, dragElt);
-  var ds3 = mxUtils.makeDraggable(img3, graphF, funct3, dragElt);
-
-  // Restores original drag icon while outside of graph
-  ds.createDragElement = mxDragSource.prototype.createDragElement;
-  ds2.createDragElement = mxDragSource.prototype.createDragElement;
-  ds3.createDragElement = mxDragSource.prototype.createDragElement;
+  // var ds = mxUtils.makeDraggable(img, graphF, funct, dragElt);
+  // var ds2 = mxUtils.makeDraggable(img2, graphF, funct2, dragElt);
+  // var ds3 = mxUtils.makeDraggable(img3, graphF, funct3, dragElt);
+  //
+  // // Restores original drag icon while outside of graph
+  // ds.createDragElement = mxDragSource.prototype.createDragElement;
+  // ds2.createDragElement = mxDragSource.prototype.createDragElement;
+  // ds3.createDragElement = mxDragSource.prototype.createDragElement;
 
 };
 

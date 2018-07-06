@@ -11,6 +11,11 @@ body {
   display: none !important;
 }
 
+.magnify {
+  font-weight: normal;
+  font-size: 1.2em;
+}
+
 .ws-data {
   height: 700px;
   margin-left: 0px;
