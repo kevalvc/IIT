@@ -60,7 +60,11 @@
               <input type="submit" class="btn btn-info btn-so delete-btn" name="" onclick="deleteCells()" value="Delete">
             </span>
             <span style="float: right;">
-              <span class="saver ws-ele"><input type="submit" class="btn btn-info btn-save save-to" name="" onclick="" value="Save"></span>
+              <span class="saver ws-ele del-rel" style="float: right;">
+                <label for="stuff" class="fa fa-floppy-o input-icon"></label>
+                <input type="submit" class="btn btn-info btn-save save-to" name="" onclick="" value="Save">
+              </span>
+            <!-- <span style="float: right;"> -->
               <!-- For saving uid & filename -->
               <div class="messagepop pop">
                 <form action="process.php" method="post">
@@ -70,7 +74,11 @@
                   <input type="text" class="hidden-xml-ip" name="content" value="" style="display: none !important;">
                 </form>
               </div>
-              <span class="saver ws-ele"><input type="submit" class="btn btn-info btn-save load-from" name="" onclick="" value="load"></span>
+
+              <span class="saver ws-ele del-rel" style="float: right;">
+                <label for="stuff" class="fa fa-spinner input-icon"></label>
+                <input type="submit" class="btn btn-info btn-save load-from" name="" onclick="" value="Load">
+              </span>
               <!-- For retrieving uid & filename -->
               <div class="messagepop2 pop2">
                 <form action="retrieve.php" method="get" onsubmit="retrieveptr()">
@@ -89,70 +97,80 @@
             <span style="display: inline-block;" class="qn-text noselect">
               <!-- Q1. Hello this is a random question of a minimum of 10 words to be displayed in the text area so please recheck it to adjust! -->
             </span>
-            <div class="col-md-2 tp-full-left text-center floater og-pal">
-              <h4 class="tool-pal noselect">CANVAS PALETTE</h4>
-              <br>
-              <span class="ws-ele"><button type="submit" class="btn btn-in btn-info magnify" name="" onclick="zoomIn()"><i class="fa fa-search-plus"></i></button></span>
-              <span class="ws-ele"><button type="submit" class="btn btn-out btn-info magnify" name="" onclick="zoomOut()"><i class="fa fa-search-minus"></i></button></span>
-              <!-- <br> -->
-              <span class="saver ws-ele text-center blocker" style=""><input id="heirarchical" type="submit" class="autolayout-btn btn btn-info text-center left-toolbar" name="" onclick="" value="Auto Layout"></span>
-              <!-- <br> -->
-              <span class="saver ws-ele text-center blocker" style=""><input type="submit" class="btn btn-info text-center left-toolbar" name="" onclick="undoChange()" id="undo-btn" value="Undo"></span>
-              <!-- <br> -->
-              <span class="saver ws-ele text-center blocker" style=""><input type="submit" class="btn btn-info text-center left-toolbar" name="" onclick="redoChange()" id="redo-btn" value="Redo"></span>
-              <!-- <br> -->
-              <span class="saver ws-ele text-center" style=""><input type="submit" class="btn btn-info text-center left-toolbar" name="" onclick="viewXML()" value="View XML"></span>
-              <!-- <br> -->
-              <!-- <span class="saver ws-ele text-center" style=""><input type="submit" class="btn btn-info text-center left-toolbar" name="" onclick="downloadXML()" value="Download XML"></span> -->
-              <!-- <input type="text" id="dwnld-name" placeholder="Save as" name="" value=""> -->
-              <!-- <br> -->
-              <span class="saver ws-ele text-center blocker" style=""><input type="submit" class="btn btn-info text-center left-toolbar" id="get_file" name="" onclick="importXML()" value="Import XML"></span>
-              <input type="file" id="my_file" onchange='loadFileAsText(event, onFileLoad.bind(this, "contents"))'>
-              <div id="customfileupload" class="text-center fileselect">Select a file</div>
-              <br>
-              <span class="saver ws-ele text-center" style=""><input type="submit" class="btn btn-info text-center left-toolbar swap-btn" name="" onclick="swappal()" value="TOOLS PALETTE"></span>
-            </div>
-            <div class="col-md-2 tp-full-left text-center floater can-pal">
-              <h4 class="tool-pal noselect">TOOLS PALETTE</h4>
-              <br>
-              <!-- <br> -->
-              <span class="saver ws-ele text-center tool-blocker noselect" style=""> <input type="image" src="css/img1.png" width="25" height="43" name="" value=""> </span>
-              <!-- <br> -->
-              <!-- <span class="saver ws-ele text-center tool-blocker" style=""> <input type="image" src="css/img2.png" width="60" height="35" onclick="eyeclick()" name="" value=""> </span> -->
-              <!-- <br> -->
-              <div class="btn-group tool-blocker noselect">
-                <input type="image" src="css/img2.png" width="60" height="35" class="btn btn-default dropdown-toggle dd-btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  <span class="caret"></span>
-                </input>
-                <ul class="dropdown-menu">
-                  <span class="saver ws-ele text-center tool-blocker" style=""> <input type="image" src="css/img6.png" width="35" height="45" onclick="" name="" value=""> </span>
-                  <span class="saver ws-ele text-center tool-blocker" style=""> <input type="image" src="css/img7.png" width="45" height="45" onclick="" name="" value=""> </span>
-                  <span class="saver ws-ele text-center tool-blocker" style=""> <input type="image" src="css/img8.png" width="45" height="45" onclick="" name="" value=""> </span>
-                </ul>
-              </div>
-              <!-- <br> -->
-              <div class="btn-group tool-blocker noselect">
-                <input type="image" src="css/img3.png" width="43" height="43" class="btn btn-default dropdown-toggle dd-btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  <span class="caret"></span>
-                </input>
-                <ul class="dropdown-menu">
-                  <span class="saver ws-ele text-center tool-blocker" style=""> <input type="image" src="css/img9.png" width="30" height="45" onclick="" name="" value=""> </span>
-                  <span class="saver ws-ele text-center tool-blocker" style=""> <input type="image" src="css/img10.png" width="45" height="45" onclick="" name="" value=""> </span>
-                </ul>
+            <div class="col-md-2 text-center floater og-pal">
+              <div class="tp-full-left">
+                <h4 class="tool-pal noselect">CANVAS PALETTE</h4>
+                <br>
                 <!-- <br> -->
-                <!-- <span class="saver ws-ele text-center tool-blocker" style=""> <input type="image" src="css/img3.png" width="43" height="43" onclick="toolclick()" name="" value=""> </span> -->
+                <span class="saver ws-ele text-center blocker" style=""><input id="heirarchical" type="submit" class="autolayout-btn btn btn-info text-center left-toolbar" name="" onclick="" value="Auto Layout"></span>
+                <!-- <br> -->
+                <span class="saver ws-ele text-center blocker" style=""><input type="submit" class="btn btn-info text-center left-toolbar" name="" onclick="undoChange()" id="undo-btn" value="Undo"></span>
+                <!-- <br> -->
+                <span class="saver ws-ele text-center blocker" style=""><input type="submit" class="btn btn-info text-center left-toolbar" name="" onclick="redoChange()" id="redo-btn" value="Redo"></span>
+                <!-- <br> -->
+                <span class="saver ws-ele text-center" style=""><input type="submit" class="btn btn-info text-center left-toolbar" name="" onclick="viewXML()" value="View XML"></span>
+                <!-- <br> -->
+                <!-- <span class="saver ws-ele text-center" style=""><input type="submit" class="btn btn-info text-center left-toolbar" name="" onclick="downloadXML()" value="Download XML"></span> -->
+                <!-- <input type="text" id="dwnld-name" placeholder="Save as" name="" value=""> -->
+                <!-- <br> -->
+                <span class="saver ws-ele text-center blocker" style=""><input type="submit" class="btn btn-info text-center left-toolbar" id="get_file" name="" onclick="importXML()" value="Import XML"></span>
+                <input type="file" id="my_file" onchange='loadFileAsText(event, onFileLoad.bind(this, "contents"))'>
+                <div id="customfileupload" class="text-center fileselect">Select a file</div>
+                <br>
               </div>
-              <!-- <br> -->
-              <span class="saver ws-ele text-center tool-blocker noselect" style=""> <input type="image" src="css/img4.png" width="40" height="40" name="" value=""> </span>
-              <!-- <br> -->
-              <span class="saver ws-ele text-center tool-blocker noselect" style=""> <input type="image" src="css/img5.png" width="55" height="47" name="" value=""> </span>
-              <!-- <br> -->
-              <span class="saver ws-ele text-center noselect" style=""><input type="submit" class="btn btn-info text-center left-toolbar swap-btn" name="" onclick="swappal()" value="CANVAS PALETTE"></span>
+              <div class="tp-swapper-left">
+                <span class="saver ws-ele text-center" style=""><input type="submit" class="btn text-center swap-btn" name="" onclick="swappal()" value="TOOLS PALETTE"></span>
+              </div>
+            </div>
+            <div class="col-md-2 text-center floater can-pal">
+              <div class="tp-full-left">
+                <h4 class="tool-pal noselect">TOOLS PALETTE</h4>
+                <br>
+                <!-- <br> -->
+                <span class="saver ws-ele text-center tool-blocker noselect" style=""> <input type="image" src="css/img1.png" width="25" height="43" name="" value=""> </span>
+                <!-- <br> -->
+                <!-- <span class="saver ws-ele text-center tool-blocker" style=""> <input type="image" src="css/img2.png" width="60" height="35" onclick="eyeclick()" name="" value=""> </span> -->
+                <!-- <br> -->
+                <div class="btn-group tool-blocker noselect">
+                  <input type="image" src="css/img2new.png" width="60" height="35" class="btn btn-default dropdown-toggle dd-btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <span class="caret"></span>
+                  </input>
+                  <ul class="dropdown-menu">
+                    <span class="saver ws-ele text-center tool-blocker" style=""> <input type="image" src="css/img6.png" width="35" height="45" onclick="" name="" value=""> </span>
+                    <span class="saver ws-ele text-center tool-blocker" style=""> <input type="image" src="css/img7.png" width="45" height="45" onclick="" name="" value=""> </span>
+                    <span class="saver ws-ele text-center tool-blocker" style=""> <input type="image" src="css/img8.png" width="45" height="45" onclick="" name="" value=""> </span>
+                  </ul>
+                </div>
+                <!-- <br> -->
+                <div class="btn-group tool-blocker noselect">
+                  <input type="image" src="css/img3new.png" width="43" height="43" class="btn btn-default dropdown-toggle dd-btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <span class="caret"></span>
+                  </input>
+                  <ul class="dropdown-menu">
+                    <span class="saver ws-ele text-center tool-blocker" style=""> <input type="image" src="css/img9.png" width="30" height="45" onclick="" name="" value=""> </span>
+                    <span class="saver ws-ele text-center tool-blocker" style=""> <input type="image" src="css/img10.png" width="45" height="45" onclick="" name="" value=""> </span>
+                  </ul>
+                  <!-- <br> -->
+                  <!-- <span class="saver ws-ele text-center tool-blocker" style=""> <input type="image" src="css/img3.png" width="43" height="43" onclick="toolclick()" name="" value=""> </span> -->
+                </div>
+                <!-- <br> -->
+                <span class="saver ws-ele text-center tool-blocker noselect" style=""> <input type="image" src="css/img4.png" width="40" height="40" name="" value=""> </span>
+                <!-- <br> -->
+                <span class="saver ws-ele text-center tool-blocker noselect" style=""> <input type="image" src="css/img5.png" width="55" height="47" name="" value=""> </span>
+                <!-- <br> -->
+              </div>
+              <div class="tp-swapper-left">
+                <span class="saver ws-ele text-center noselect" style=""><input type="submit" class="btn text-center swap-btn" name="" onclick="swappal()" value="CANVAS PALETTE"></span>
+              </div>
             </div>
             <div class="col-md-8 main-row floater">
               <div class="main-ws" id="mainer">
 
                 <!-- <span class="element1">You can drag me only within this div.</span> -->
+                <span class="zoomdata">
+                  <span class="zoom-ele"><button type="submit" class="btn btn-in magnify" name="" onclick="zoomIn()"><i class="fa fa-search-plus"></i></button></span>
+                  <span class="zoom-ele"><button type="submit" class="btn btn-out magnify" name="" onclick="zoomOut()"><i class="fa fa-search-minus"></i></button></span>
+                </span>
               </div>
             </div>
             <div class="col-md-2 tp-full text-center floater">

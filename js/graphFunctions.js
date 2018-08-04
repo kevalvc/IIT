@@ -541,7 +541,7 @@ function addFSBVertex(container, token) {
     if (token == 1) {
       // var v1 = graph.insertVertex(parent, null, "F", x, y, 80, 80,'fillColor=#45afe3;shape=ellipse'); //x,y,width,height
       parent = graph.getDefaultParent();
-      var cell = new mxCell('F', new mxGeometry(x, y, 80, 80), 'fillColor=#45afe3;shape=ellipse;');
+      var cell = new mxCell('F', new mxGeometry(x, y, 80, 80), 'fillColor=#a864a8;shape=ellipse;');
       cell.vertex = true;
       cell.connectable = true;
       // cell.geometry.relative = true;
@@ -553,7 +553,7 @@ function addFSBVertex(container, token) {
     if (token == 2) {
       // var v2 = graph.insertVertex(parent, null, "S", x, y, 80, 70,'fillColor=#ffa500;shape=hexagon'); //x,y,width,height
       parent = graph.getDefaultParent();
-      var cell = new mxCell('S', new mxGeometry(x, y, 80, 70), 'fillColor=#ffa500;shape=hexagon;');
+      var cell = new mxCell('S', new mxGeometry(x, y, 80, 70), 'fillColor=#f26c4f;shape=hexagon;');
       cell.vertex = true;
       cell.connectable = true;
       // cell.geometry.relative = true;
@@ -564,7 +564,7 @@ function addFSBVertex(container, token) {
     } else {
       // var v3 = graph.insertVertex(parent, null, "B", x, y, 80, 40,'fillColor=#fe5;shape=rectangle'); //x,y,width,height
       parent = graph.getDefaultParent();
-      var cell = new mxCell('B', new mxGeometry(x, y, 80, 40), 'fillColor=#fe5;shape=rectangle;');
+      var cell = new mxCell('B', new mxGeometry(x, y, 80, 40), 'fillColor=#00aeef;shape=rectangle;');
       cell.vertex = true;
       cell.connectable = true;
       // cell.geometry.relative = true;
@@ -655,7 +655,7 @@ function main(container) {
 
   // graph.maximumGraphBounds = new mxRectangle(0, 0, parseInt($('.main-ws').width()), parseInt($('.main-ws').height()));
   var style = graph.getStylesheet().getDefaultVertexStyle();
-
+  style[mxConstants.STYLE_FONTCOLOR]= '#fff';
   // Tap and hold on background starts rubberband for multiple selected
   // cells the cell associated with the event is deselected
   graph.addListener(mxEvent.TAP_AND_HOLD, function(sender, evt) {
